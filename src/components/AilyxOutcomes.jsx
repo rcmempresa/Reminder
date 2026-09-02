@@ -128,7 +128,7 @@ export default function AilyxOutcomes() {
           </div>
 
           {/* 5 outcome cards */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '14px' }}>
+          <div className="ayl-outcomes-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '14px' }}>
             {OUTCOMES.map((o, i) => (
               <div key={i} className="ayl-card--hover" style={{
                 padding: '24px 20px',

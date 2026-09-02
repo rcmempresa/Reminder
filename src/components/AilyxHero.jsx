@@ -85,7 +85,7 @@ export default function AilyxHero() {
         zIndex: 2,
       }}>
         <div className="ayl-container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
+          <div className="ayl-hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
 
             {/* LEFT — copy */}
             <div ref={contentRef} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -130,7 +130,7 @@ export default function AilyxHero() {
             </div>
 
             {/* RIGHT — Robot visual */}
-            <div ref={robotRef} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', opacity: 0 }}>
+            <div ref={robotRef} className="ayl-hero-robot" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', opacity: 0 }}>
               <RobotVisual />
             </div>
 
@@ -146,7 +146,7 @@ export default function AilyxHero() {
         backdropFilter: 'blur(10px)',
       }}>
         <div className="ayl-container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', padding: '20px 0' }}>
+          <div className="ayl-hero-trustbar" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', padding: '20px 0' }}>
             {[
               { value: '7 dias', label: 'para ter clareza' },
               { value: '30 dias', label: 'sistema a funcionar' },

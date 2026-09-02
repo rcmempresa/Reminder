@@ -62,7 +62,7 @@ export default function AilyxAudit() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 'clamp(40px, 6vw, 80px)', alignItems: 'start' }}>
+        <div className="ayl-audit-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 'clamp(40px, 6vw, 80px)', alignItems: 'start' }}>
 
           {/* Left — areas de análise */}
           <div ref={leftRef}>

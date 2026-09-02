@@ -3637,3 +3637,130 @@ svg path[stroke-dasharray] {
   95%  { opacity: 1; }
   100% { top: 100%; opacity: 0; }
 }
+
+
+/* ── Prevent horizontal scroll on mobile ── */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+/* ════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — max-width: 768px
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Global container ── */
+  .ayl-container {
+    padding: 0 20px !important;
+  }
+
+  /* ── Nav ── */
+  .ayl-nav__links { display: none; }
+  .ayl-btn--nav { font-size: 12px !important; padding: 10px 14px !important; }
+
+  /* ── Hero ── */
+  .ayl-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  .ayl-hero-robot { display: none !important; }
+  .ayl-hero-trustbar {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0 !important;
+  }
+  .ayl-hero-trustbar > div {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 12px 0 !important;
+  }
+
+  /* ── Services / Problema ── */
+  .ayl-services-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .ayl-services-visual { display: none !important; }
+
+  /* ── Solution 3 passos ── */
+  .ayl-solution-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* ── Audit ── */
+  .ayl-audit-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* ── Includes ── */
+  .ayl-includes-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* ── Outcomes ── */
+  .ayl-outcomes-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  /* ── Headings ── */
+  .ayl-h2 {
+    font-size: clamp(26px, 7vw, 38px) !important;
+  }
+
+  /* ── Buttons ── */
+  .ayl-btn, .ayl-btn--primary, .ayl-btn--white {
+    font-size: 14px !important;
+    padding: 14px 20px !important;
+    width: 100% !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ── Footer CTA section ── */
+  .ayl-footer-cta__actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  /* ── Section padding ── */
+  section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* ── Urgency bar ── */
+  .urgency-bar--bottom {
+    width: calc(100% - 32px) !important;
+    font-size: 11px !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    border-radius: 14px !important;
+  }
+
+  /* ── Hermes chat ── */
+  div[style*="width: 360px"][style*="height: 500px"] {
+    width: calc(100vw - 24px) !important;
+    right: 12px !important;
+    bottom: 90px !important;
+  }
+  button[aria-label="Abrir Hermes"] {
+    right: 16px !important;
+    bottom: 20px !important;
+  }
+  div[style*="bottom: 100px"][style*="right: 28px"][style*="background: rgb(255"] {
+    right: 16px !important;
+  }
+}
+
+/* ── Extra small (< 480px) ── */
+@media (max-width: 480px) {
+  .ayl-hero-trustbar {
+    grid-template-columns: 1fr !important;
+  }
+  .ayl-outcomes-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

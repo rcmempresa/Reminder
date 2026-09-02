@@ -164,7 +164,7 @@ export default function AilyxSolution() {
         </div>
 
         {/* 3 step cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+        <div className="ayl-solution-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
           {STEPS.map((step, i) => (
             <div
               key={i}

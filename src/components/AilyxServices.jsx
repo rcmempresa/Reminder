@@ -72,7 +72,7 @@ export default function AilyxServices() {
       }} />
 
       <div className="ayl-container" style={{ position: 'relative', zIndex: 2 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
+        <div className="ayl-services-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
 
           {/* LEFT */}
           <div ref={textRef} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
@@ -130,7 +130,7 @@ export default function AilyxServices() {
           </div>
 
           {/* RIGHT — live AI system visual */}
-          <div style={{ position: 'relative', height: '440px', width: '100%' }}>
+          <div className="ayl-services-visual" style={{ position: 'relative', height: '440px', width: '100%' }}>
 
             {/* SVG: connection lines + animated data pulses */}
             <svg
