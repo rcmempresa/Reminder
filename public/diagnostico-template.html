@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Diagnóstico de Receita Perdida — Remindr.ai</title>
+<style>
+  /* ── Variáveis ───────────────────────────────────────────── */
+  :root {
+    --purple:      #5B4FE9;
+    --purple-dark: #2D1FA8;
+    --navy:        #130E3A;
+    --navy-2:      #1C1550;
+    --green:       #22c55e;
+    --yellow:      #ffd166;
+    --text:        #0D0C1D;
+    --text-2:      #4A4769;
+    --text-3:      #8B88A3;
+    --border:      #E8E8EE;
+    --bg-alt:      #F2F2F5;
+  }
+
+  /* ── Reset & Base ────────────────────────────────────────── */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background: #ffffff;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── Print ───────────────────────────────────────────────── */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  @media print {
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    body { font-size: 13px; }
+  }
+
+  /* ── Layout ──────────────────────────────────────────────── */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── Cover Page ──────────────────────────────────────────── */
+  .cover {
+    background: linear-gradient(145deg, #130E3A 0%, #1C1550 50%, #2D1FA8 100%);
+    min-height: 297mm;
+    display: flex;
+    flex-direction: column;
+    padding: 52px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(91,79,233,0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(155,147,245,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover__logo-img {
+    height: 32px;
+    filter: brightness(0) invert(1);
+  }
+
+  .cover__logo-text {
+    font-size: 18px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+
+  .cover__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover__badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .cover__title {
+    font-size: 42px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover__title span {
+    color: var(--yellow);
+  }
+
+  .cover__subtitle {
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    max-width: 380px;
+    margin-bottom: 56px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .cover__meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cover__meta-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .cover__meta-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* ── Section Pages ───────────────────────────────────────── */
+  .section-page {
+    padding: 48px 56px;
+    min-height: 297mm;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-header {
+    margin-bottom: 36px;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .section-title {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    line-height: 1.15;
+  }
+
+  .section-sub {
+    font-size: 14px;
+    color: var(--text-2);
+    margin-top: 8px;
+    line-height: 1.6;
+  }
+
+  /* ── Result Block ────────────────────────────────────────── */
+  .result-hero {
+    background: linear-gradient(135deg, #130E3A 0%, #2D1FA8 100%);
+    border-radius: 20px;
+    padding: 40px 44px;
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 300px; height: 200px;
+    background: radial-gradient(ellipse, rgba(255,210,100,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .result-hero__pre {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .result-hero__amount {
+    font-size: 72px;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: var(--yellow);
+    line-height: 1;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .result-hero__per {
+    font-size: 22px;
+    font-weight: 700;
+    color: rgba(255,210,100,0.6);
+    vertical-align: middle;
+    letter-spacing: 0;
+  }
+
+  .result-hero__post {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    max-width: 380px;
+    margin: 0 auto;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  /* ── Breakdown ───────────────────────────────────────────── */
+  .breakdown {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 0;
+    background: var(--bg-alt);
+    border-radius: 14px;
+    padding: 20px 24px;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .bk-item {
+    text-align: center;
+  }
+
+  .bk-val {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    display: block;
+  }
+
+  .bk-label {
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 3px;
+  }
+
+  .bk-sep {
+    font-size: 20px;
+    color: var(--border);
+    font-weight: 700;
+    text-align: center;
+    padding: 0 8px;
+  }
+
+  /* ── Data Table ──────────────────────────────────────────── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+  }
+
+  .data-table th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .data-table td {
+    padding: 12px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+
+  .data-table td:last-child {
+    font-weight: 700;
+    text-align: right;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .badge--red { background: #fee2e2; color: #dc2626; }
+  .badge--green { background: #dcfce7; color: #16a34a; }
+
+  /* ── Before / After ──────────────────────────────────────── */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .compare-card {
+    border-radius: 14px;
+    padding: 24px;
+    border: 1.5px solid var(--border);
+  }
+
+  .compare-card--before {
+    background: #fef2f2;
+    border-color: #fecaca;
+  }
+
+  .compare-card--after {
+    background: linear-gradient(135deg, #130E3A 0%, #2D1FA8 100%);
+    border-color: transparent;
+  }
+
+  .compare-card__label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .compare-card--before .compare-card__label { color: #dc2626; }
+  .compare-card--after  .compare-card__label { color: rgba(255,255,255,0.5); }
+
+  .compare-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid;
+    font-size: 12.5px;
+  }
+
+  .compare-card--before .compare-row { border-color: #fecaca; }
+  .compare-card--after  .compare-row { border-color: rgba(255,255,255,0.1); }
+
+  .compare-row:last-child { border-bottom: none; }
+
+  .compare-card--before .compare-row__label { color: var(--text-2); }
+  .compare-card--after  .compare-row__label { color: rgba(255,255,255,0.55); }
+
+  .compare-card--before .compare-row__val { color: #dc2626; font-weight: 700; }
+  .compare-card--after  .compare-row__val { color: white; font-weight: 700; }
+
+  /* ── Urgency Block ───────────────────────────────────────── */
+  .urgency-block {
+    background: #fef9ec;
+    border: 1.5px solid #fde68a;
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .urgency-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .urgency-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #92400e;
+    margin-bottom: 4px;
+  }
+
+  .urgency-text {
+    font-size: 13px;
+    color: #78350f;
+    line-height: 1.55;
+  }
+
+  .urgency-credit {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #d97706;
+  }
+
+  /* ── CTA Block ───────────────────────────────────────────── */
+  .cta-block {
+    background: linear-gradient(135deg, #5B4FE9 0%, #3D34C7 100%);
+    border-radius: 20px;
+    padding: 36px 44px;
+    text-align: center;
+    margin-top: auto;
+  }
+
+  .cta-block__title {
+    font-size: 22px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.025em;
+    margin-bottom: 8px;
+  }
+
+  .cta-block__sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .cta-block__btn {
+    display: inline-block;
+    background: white;
+    color: var(--purple-dark);
+    font-size: 14px;
+    font-weight: 800;
+    padding: 13px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+
+  .cta-block__fine {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ── Guarantee ───────────────────────────────────────────── */
+  .guarantee-strip {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(34,197,94,0.06);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+
+  .guarantee-icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(34,197,94,0.1);
+    border: 1.5px solid rgba(34,197,94,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .guarantee-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: #15803d;
+    margin-bottom: 2px;
+  }
+
+  .guarantee-text {
+    font-size: 12px;
+    color: #166534;
+    line-height: 1.5;
+  }
+
+  /* ── Steps ───────────────────────────────────────────────── */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 28px;
+  }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step__num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--purple);
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step__title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .step__text {
+    font-size: 12.5px;
+    color: var(--text-2);
+    line-height: 1.55;
+  }
+
+  /* ── Page footer ─────────────────────────────────────────── */
+  .page-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+
+  .page-footer__brand {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--purple);
+  }
+
+  .page-footer__note {
+    font-size: 10px;
+    color: var(--text-3);
+  }
+
+  /* ── Print Button ────────────────────────────────────────── */
+  .print-btn-wrap {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    display: flex;
+    gap: 12px;
+    z-index: 999;
+  }
+
+  .print-btn {
+    background: var(--purple);
+    color: white;
+    border: none;
+    padding: 13px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 4px 20px rgba(91,79,233,0.35);
+  }
+
+  .print-btn:hover { background: var(--purple-dark); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     PÁGINA 1 — CAPA
+══════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="cover">
+    <div class="cover__logo">
+      <img src="/logotipo_sem_fundo.png" alt="Remindr.ai" class="cover__logo-img" onerror="this.style.display='none'" />
+      <span class="cover__logo-text">Remindr.ai</span>
+    </div>
+
+    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1;">
+      <div class="cover__badge">
+        <div class="cover__badge-dot"></div>
+        Diagnóstico Personalizado · Confidencial
+      </div>
+
+      <h1 class="cover__title">
+        Diagnóstico de<br />
+        <span>Receita Perdida</span>
+      </h1>
+
+      <p class="cover__subtitle">
+        Análise do potencial de receita não convertida da <strong id="empresa-cover" style="color:rgba(255,255,255,0.85)">{{EMPRESA}}</strong> com base nos dados fornecidos e benchmarks do sector.
+      </p>
+    </div>
+
+    <div class="cover__meta">
+      <div class="cover__meta-row">
+        <span class="cover__meta-label">Empresa</span>
+        <span class="cover__meta-value" id="meta-empresa">{{EMPRESA}}</span>
+      </div>
+      <div class="cover__meta-row">
+        <span class="cover__meta-label">Contacto</span>
+        <span class="cover__meta-value" id="meta-nome">{{NOME}}</span>
+      </div>
+      <div class="cover__meta-row">
+        <span class="cover__meta-label">Sector</span>
+        <span class="cover__meta-value" id="meta-sector">{{SECTOR}}</span>
+      </div>
+      <div class="cover__meta-row">
+        <span class="cover__meta-label">Data do diagnóstico</span>
+        <span class="cover__meta-value" id="meta-data">{{DATA}}</span>
+      </div>
+      <div class="cover__meta-row">
+        <span class="cover__meta-label">Preparado por</span>
+        <span class="cover__meta-value">Equipa Remindr.ai · ola@remindr.ai</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     PÁGINA 2 — RESULTADO PRINCIPAL
+══════════════════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="section-page">
+    <div class="section-header">
+      <span class="section-tag">01 — Resultado do Diagnóstico</span>
+      <h2 class="section-title">O número que estás a deixar na mesa todos os meses</h2>
+      <p class="section-sub">Baseado nos dados fornecidos por <strong id="nome-p2">{{NOME}}</strong> · <strong id="empresa-p2">{{EMPRESA}}</strong></p>
+    </div>
+
+    <div class="result-hero">
+      <p class="result-hero__pre">A <strong id="empresa-result">{{EMPRESA}}</strong> está a perder aproximadamente</p>
+      <div class="result-hero__amount">
+        €<span id="receita-perdida">{{RECEITA_PERDIDA}}</span><span class="result-hero__per">/mês</span>
+      </div>
+      <p class="result-hero__post">
+        em leads que já pagaste para gerar — e que a concorrência está a fechar enquanto a tua equipa não responde.
+      </p>
+    </div>
+
+    <div class="breakdown">
+      <div class="bk-item">
+        <span class="bk-val" id="leads-perdidas">{{LEADS_PERDIDAS}}</span>
+        <span class="bk-label">leads perdidas/mês</span>
+      </div>
+      <div class="bk-sep">×</div>
+      <div class="bk-item">
+        <span class="bk-val">5%</span>
+        <span class="bk-label">conversão B2B</span>
+      </div>
+      <div class="bk-sep">×</div>
+      <div class="bk-item">
+        <span class="bk-val" id="ticket">{{TICKET}}</span>
+        <span class="bk-label">ticket médio</span>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Dados fornecidos</th>
+          <th>Valor actual</th>
+          <th style="text-align:right">Impacto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Leads por mês</td>
+          <td id="td-leads">{{LEADS_MES}}</td>
+          <td><span class="badge badge--red" id="td-leads-perdidas-badge">{{LEADS_PERDIDAS}} perdidas</span></td>
+        </tr>
+        <tr>
+          <td>Tempo de resposta actual</td>
+          <td id="td-resposta">{{TEMPO_RESPOSTA}}</td>
+          <td><span class="badge badge--red">Acima do óptimo</span></td>
+        </tr>
+        <tr>
+          <td>Taxa de contacto actual</td>
+          <td id="td-contacto">{{TAXA_CONTACTO}}</td>
+          <td><span class="badge badge--red" id="td-nao-contactadas">{{NAO_CONTACTADAS}}% sem resposta</span></td>
+        </tr>
+        <tr>
+          <td>Ticket médio de venda</td>
+          <td id="td-ticket2">{{TICKET}}</td>
+          <td><span class="badge badge--green">Válido para ROI</span></td>
+        </tr>
+        <tr>
+          <td>Investimento mensal em leads</td>
+          <td id="td-investimento">{{INVESTIMENTO}}</td>
+          <td><span class="badge badge--red" id="td-roi-atual">ROI actual comprometido</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-footer">
+      <span class="page-footer__brand">Remindr.ai · Diagnóstico Confidencial</span>
+      <span class="page-footer__note">Estimativa conservadora · Taxa de conversão B2B: 5% · Página 2 de 3</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     PÁGINA 3 — ANTES / DEPOIS + PRÓXIMOS PASSOS
+══════════════════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="section-page">
+    <div class="section-header">
+      <span class="section-tag">02 — O que muda com o Recall by Remindr</span>
+      <h2 class="section-title">Da situação actual ao potencial real</h2>
+      <p class="section-sub">Comparação directa para o caso da <strong id="empresa-p3">{{EMPRESA}}</strong></p>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-card compare-card--before">
+        <span class="compare-card__label">Sem Recall — Hoje</span>
+        <div class="compare-row">
+          <span class="compare-row__label">Tempo de resposta</span>
+          <span class="compare-row__val" id="cmp-resposta-antes">{{TEMPO_RESPOSTA}}</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-row__label">Taxa de contacto</span>
+          <span class="compare-row__val" id="cmp-contacto-antes">{{TAXA_CONTACTO}}</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-row__label">Leads perdidas/mês</span>
+          <span class="compare-row__val" id="cmp-leads-antes">{{LEADS_PERDIDAS}}</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-row__label">Disponibilidade</span>
+          <span class="compare-row__val">Horário comercial</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-row__label">Receita perdida/mês</span>
+          <span class="compare-row__val">€<span id="cmp-receita-antes">{{RECEITA_PERDIDA}}</span></span>
+        </div>
+      </div>
+
+      <div class="compare-card compare-card--after">
+        <span class="compare-card__label">Com Recall — Em 14 dias</span>
+        <div class="compare-row">
+          <span class="compare-row__label" style="color:rgba(255,255,255,0.55)">Tempo de resposta</span>
+          <span class="compare-row__val" style="color:#22c55e">Menos de 60s</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-row__label" style="color:rgba(255,255,255,0.55)">Taxa de contacto</span>
+          <span class="compare-row__val" style="color:#22c55e">100%</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-row__label" style="color:rgba(255,255,255,0.55)">Leads perdidas/mês</span>
+          <span class="compare-row__val" style="color:#22c55e">0</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-row__label" style="color:rgba(255,255,255,0.55)">Disponibilidade</span>
+          <span class="compare-row__val" style="color:#22c55e">24/7</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-row__label" style="color:rgba(255,255,255,0.55)">Receita recuperada/mês</span>
+          <span class="compare-row__val" style="color:#22c55e">+€<span id="cmp-receita-depois">{{RECEITA_PERDIDA}}</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="urgency-block">
+      <div class="urgency-icon">⚡</div>
+      <div>
+        <p class="urgency-title">Cada dia sem o sistema custa €<span id="custo-diario">{{CUSTO_DIARIO}}</span></p>
+        <p class="urgency-text">
+          Com base na estimativa de €<span id="urgency-receita">{{RECEITA_PERDIDA}}</span>/mês, a <strong id="urgency-empresa">{{EMPRESA}}</strong> está a perder aproximadamente €<span id="urgency-diario2">{{CUSTO_DIARIO}}</span> por dia em oportunidades não convertidas.
+        </p>
+        <p class="urgency-credit">O diagnóstico é creditável no valor da implementação se avançares nos próximos 7 dias.</p>
+      </div>
+    </div>
+
+    <div class="guarantee-strip">
+      <div class="guarantee-icon">🛡️</div>
+      <div>
+        <p class="guarantee-title">Garantia de Performance — 30 Dias</p>
+        <p class="guarantee-text">Se o Recall não cumprir os KPIs definidos no contrato (resposta em &lt;60s a 100% das leads válidas e alvo de reuniões acordado), devolvemos o setup integralmente. O sistema fica instalado contigo sem custo adicional.</p>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="font-size:16px; font-weight:800; color:var(--text); margin-bottom:16px; letter-spacing:-0.02em;">Próximos passos</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">1</div>
+          <div>
+            <p class="step__title">Chamada de qualificação — 10 minutos</p>
+            <p class="step__text">Confirmamos os dados e verificamos o fit técnico com os teus sistemas actuais. Sem pressão, sem pitch de vendas.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">2</div>
+          <div>
+            <p class="step__title">Diagnóstico técnico ao vivo</p>
+            <p class="step__text">Calculamos o número exacto (não a estimativa) com base nos teus dados reais de CRM e formulários. Mostramos o sistema a funcionar ao vivo.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">3</div>
+          <div>
+            <p class="step__title">Implementação em 14 dias</p>
+            <p class="step__text">A nossa equipa instala tudo. Primeiros contactos automáticos ao dia 5. Sistema a 100% ao dia 14. Tu não tocas em código.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <p class="cta-block__title">Agenda a chamada de qualificação gratuita</p>
+      <p class="cta-block__sub">
+        30 minutos. Sem compromisso. Descobre se o Recall faz sentido para a <span id="cta-empresa">{{EMPRESA}}</span>.
+      </p>
+      <a href="mailto:ola@remindr.ai?subject=Chamada%20de%20Qualificação%20—%20{{EMPRESA}}" class="cta-block__btn">
+        Responder a este email para agendar →
+      </a>
+      <p class="cta-block__fine">ou escreve directamente para ola@remindr.ai · WhatsApp disponível</p>
+    </div>
+
+    <div class="page-footer" style="margin-top: 20px;">
+      <span class="page-footer__brand">Remindr.ai · Diagnóstico Confidencial</span>
+      <span class="page-footer__note">Documento preparado exclusivamente para {{EMPRESA}} · Não partilhar · Página 3 de 3</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Botão de impressão (não aparece no PDF) ─── -->
+<div class="print-btn-wrap no-print">
+  <button class="print-btn" onclick="window.print()">Guardar como PDF</button>
+</div>
+
+<script>
+// Preenche os placeholders com os dados reais (editar aqui antes de imprimir)
+const DATA = {
+  EMPRESA:         '{{EMPRESA}}',
+  NOME:            '{{NOME}}',
+  SECTOR:          '{{SECTOR}}',
+  DATA:            new Date().toLocaleDateString('pt-PT', { day:'2-digit', month:'long', year:'numeric' }),
+  RECEITA_PERDIDA: '{{RECEITA_PERDIDA}}',
+  LEADS_PERDIDAS:  '{{LEADS_PERDIDAS}}',
+  LEADS_MES:       '{{LEADS_MES}}',
+  TICKET:          '{{TICKET}}',
+  TEMPO_RESPOSTA:  '{{TEMPO_RESPOSTA}}',
+  TAXA_CONTACTO:   '{{TAXA_CONTACTO}}',
+  NAO_CONTACTADAS: '{{NAO_CONTACTADAS}}',
+  INVESTIMENTO:    '{{INVESTIMENTO}}',
+  CUSTO_DIARIO:    '{{CUSTO_DIARIO}}',
+};
+
+// Substitui todos os {{PLACEHOLDER}} na página
+document.body.innerHTML = document.body.innerHTML.replace(
+  /\{\{(\w+)\}\}/g,
+  (_, key) => DATA[key] ?? `{{${key}}}`
+);
+</script>
+</body>
+</html>
