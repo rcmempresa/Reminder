@@ -9,7 +9,7 @@ const DELIVERABLES = [
     num: '01',
     title: 'Diagnóstico',
     desc: 'Analisamos os processos críticos da sua empresa e identificamos onde existe maior potencial de melhoria.',
-    detail: '7 dias · Gratuito',
+    detail: '60 min · Gratuito',
   },
   {
     num: '02',
@@ -58,7 +58,7 @@ export default function AilyxIncludes() {
   }, [])
 
   return (
-    <section style={{ background: '#fff', padding: 'clamp(80px, 10vw, 120px) 0', borderTop: '1px solid #e8edf5' }}>
+    <section style={{ background: '#fff', padding: 'clamp(80px, 10vw, 120px) 0', borderTop: '1px solid #e8edf5' }} id="systems">
       <div className="ayl-container">
 
         <div className="ayl-includes-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(40px, 6vw, 80px)', alignItems: 'start' }}>

@@ -70,7 +70,7 @@ export default function AilyxProof() {
             Números reais. Processos reais.<br />Resultados que ficam.
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '17px', maxWidth: '500px', margin: '0 auto', lineHeight: 1.65 }}>
-            Três exemplos do tipo de problemas que identificamos nos primeiros 7 dias — e o que acontece 30 dias depois.
+            Três exemplos do tipo de problemas que identificamos numa reunião de diagnóstico — e o que acontece 30 dias depois de implementar.
           </p>
         </div>
 
@@ -133,7 +133,7 @@ export default function AilyxProof() {
             Começar o Diagnóstico Gratuito →
           </a>
           <p style={{ marginTop: '12px', fontSize: '13px', color: 'rgba(255,255,255,0.3)' }}>
-            Gratuito · 7 dias · Sem compromisso
+            Gratuito · 60 min · Sem compromisso
           </p>
         </div>
 

@@ -89,7 +89,7 @@ export default function AilyxMethod() {
             Começar pelo primeiro problema →
           </a>
           <p style={{ marginTop: '14px', fontSize: '13px', color: 'rgba(255,255,255,0.35)' }}>
-            Gratuito · 7 dias · Sem compromisso
+            Gratuito · 60 min · Sem compromisso
           </p>
         </div>
 

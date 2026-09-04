@@ -125,7 +125,7 @@ export default function AilyxHero() {
               </div>
 
               <span style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.02em' }}>
-                Diagnóstico gratuito · 7 dias · Sem compromisso
+                Diagnóstico gratuito · 60 min · Sem compromisso
               </span>
             </div>
 
@@ -148,7 +148,7 @@ export default function AilyxHero() {
         <div className="ayl-container">
           <div className="ayl-hero-trustbar" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', padding: '20px 0' }}>
             {[
-              { value: '7 dias', label: 'para ter clareza' },
+              { value: '60 min', label: 'para ter clareza' },
               { value: '30 dias', label: 'sistema a funcionar' },
               { value: '100% feito por nós', label: 'sem trabalho técnico seu' },
               { value: 'Risco zero', label: 'sem compromisso' },
@@ -184,7 +184,7 @@ const heroCy = c => c.py + 24  // card ~48px tall
 
 function RobotVisual() {
   return (
-    <div style={{ position: 'relative', width: '440px', height: '440px' }}>
+    <div className="ayl-robot-canvas" style={{ position: 'relative', width: '440px', height: '440px' }}>
 
       {/* Deep glow behind robot */}
       <div style={{

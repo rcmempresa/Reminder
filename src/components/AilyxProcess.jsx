@@ -55,7 +55,7 @@ export default function AilyxProcess() {
           <div>
             <div className="ayl-section-label">Como funciona o Diagnóstico</div>
             <h2 className="ayl-h2">
-              7 dias para saber<br />onde está a oportunidade.
+              60 minutos para saber<br />onde está a oportunidade.
             </h2>
           </div>
           <div style={{ maxWidth: '320px' }}>
@@ -117,7 +117,7 @@ export default function AilyxProcess() {
             Quero identificar as minhas oportunidades →
           </a>
           <span style={{ fontSize: '13px', color: '#aaa' }}>
-            7 dias · Análise completa · Plano de prioridades
+            60 min · Análise completa · Plano de prioridades
           </span>
         </div>
 

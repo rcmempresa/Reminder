@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { supabase } from '../lib/supabase'
 
 /* ── Data ── */
 const SETORES = [
@@ -135,11 +136,10 @@ export default function DiagnosticoPage() {
     const iaMaturidadeLabel = IA_MATURIDADE.find(i => i.id === values.ia_maturidade)?.label || '—'
     const intencaoLabel = INTENCAO.find(i => i.id === values.intencao)?.label || '—'
 
-    // Substitui pelo URL da tua Apps Script Web App
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_Yfcy8gQeR25U6j45ZU0dzQwHzaEXtcdXm8BzcXo2MPiqNBrezJlEeaFXpiZv0Q1PPQ/exec'
+
+    // 1. Google Sheets + email (existente)
     try {
-      // mode: 'no-cors' necessário por causa dos redirects do Google Apps Script
-      // A resposta é opaca mas os dados chegam sempre ao script
       fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -159,10 +159,35 @@ export default function DiagnosticoPage() {
           _score:         scoring.score,
           _tier:          scoring.tier,
           _tier_label:    scoring.label,
-          _subject: `[TIER ${scoring.tier}] AI Growth Audit — ${values.empresa} (${values.setor}) · Score ${scoring.score}`,
+          _subject: `[TIER ${scoring.tier}] Diagnóstico — ${values.empresa} (${values.setor}) · Score ${scoring.score}`,
         }),
       })
     } catch (_) {}
+
+    // 2. CRM Supabase (novo)
+    try {
+      const notesLines = [
+        `IA: ${iaMaturidadeLabel}`,
+        `Intenção: ${intencaoLabel}`,
+        values.prioridade ? `Prioridade: ${values.prioridade}` : null,
+      ].filter(Boolean).join('\n')
+
+      supabase.from('leads').insert({
+        nome:      values.nome,
+        empresa:   values.empresa,
+        email:     values.email,
+        website:   values.website || null,
+        setor:     values.setor,
+        equipa:    values.equipa,
+        faturacao: values.faturacao,
+        problema:  problemasLabels,
+        fonte:     'Inbound',
+        stage:     'nova',
+        score:     scoring.tier,
+        notes:     notesLines,
+      })
+    } catch (_) {}
+
     // Navega para /obrigado com o tier como query param
     navigate(`/obrigado?tier=${scoring.tier}`)
   }
@@ -176,7 +201,7 @@ export default function DiagnosticoPage() {
             Diagnóstico Gratuito
           </p>
           <h2 className="r-h2" style={{ marginBottom: '12px', color: '#0a1c42' }}>
-            Veja se a sua empresa é elegível<br />para o AI Growth Audit
+            Veja se a sua empresa é elegível<br />para o Diagnóstico Gratuito
           </h2>
           <p className="r-body" style={{ maxWidth: '520px', margin: '0 auto', color: '#666' }}>
             O diagnóstico é gratuito, mas trabalhamos apenas com empresas onde acreditamos

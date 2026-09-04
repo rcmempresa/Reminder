@@ -24,7 +24,7 @@ const FAQS = [
   },
   {
     q: 'Quanto tempo demora o diagnóstico?',
-    a: 'É feito ao longo de 7 dias. No final apresentamos as oportunidades identificadas, a prioridade e o caminho recomendado.',
+    a: 'É uma reunião de 60 minutos. No final apresentamos as oportunidades identificadas, a prioridade e o caminho recomendado.',
   },
   {
     q: 'E a implementação?',

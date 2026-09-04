@@ -1,6 +1,6 @@
 const STATS = [
   {
-    value: '7 dias',
+    value: '60 min',
     label: 'Diagnóstico gratuito — análise completa dos seus processos e oportunidades',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(144,200,255,0.7)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

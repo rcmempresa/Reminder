@@ -63,8 +63,6 @@ export default function App() {
         } />
         <Route path="/case-studies" element={<Navigate to="/" replace />} />
         <Route path="/features" element={<Navigate to="/" replace />} />
-        <Route path="/crm" element={<Navigate to="/" replace />} />
-        <Route path="/crm/diagnostico" element={<Navigate to="/diagnostico" replace />} />
         <Route path="/diagnostico" element={<DiagnosticoPage />} />
         <Route path="/obrigado" element={<ThankYouPage />} />
       </Routes>

@@ -76,7 +76,7 @@ export default function AilyxGuarantee() {
                 Começar o Diagnóstico Gratuito →
               </a>
               <p style={{ marginTop: '12px', fontSize: '13px', color: '#aaa' }}>
-                7 dias · Gratuito · Sem compromisso
+                60 min · Gratuito · Sem compromisso
               </p>
             </div>
           </div>

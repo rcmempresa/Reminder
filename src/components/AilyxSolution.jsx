@@ -220,7 +220,7 @@ export default function AilyxSolution() {
           <a href="/diagnostico" className="ayl-btn ayl-btn--primary">
             Começar o diagnóstico →
           </a>
-          <span style={{ fontSize: '13px', color: '#aaa' }}>Gratuito · 7 dias · Sem compromisso</span>
+          <span style={{ fontSize: '13px', color: '#aaa' }}>Gratuito · 60 min · Sem compromisso</span>
         </div>
 
       </div>

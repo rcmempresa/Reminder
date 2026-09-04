@@ -56,7 +56,7 @@ export default function AilyxFooterCTA() {
           </h2>
 
           <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '17px', maxWidth: '500px', margin: 0, lineHeight: 1.65 }}>
-            O próximo gargalo da sua empresa pode ser mais fácil de resolver do que pensa. Em 7 dias identificamos onde a IA pode criar maior impacto. Depois decide se quer avançar.
+            O próximo gargalo da sua empresa pode ser mais fácil de resolver do que pensa. Numa reunião de 60 minutos identificamos onde um sistema de AI pode criar maior impacto. Depois decide se quer avançar.
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
@@ -64,7 +64,7 @@ export default function AilyxFooterCTA() {
               Descobrir a minha maior oportunidade →
             </a>
             <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)' }}>
-              Diagnóstico gratuito · 7 dias · Sem compromisso
+              Diagnóstico gratuito · 60 min · Sem compromisso
             </span>
           </div>
 

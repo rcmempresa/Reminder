@@ -54,7 +54,7 @@ export default function AilyxAudit() {
             </span>
           </div>
           <h2 className="ayl-h2" style={{ marginBottom: '12px', color: '#0a1c42' }}>
-            Descubra em 7 dias onde a sua empresa<br />está a perder tempo e dinheiro.
+            Descubra numa reunião de 60 min onde a sua empresa<br />está a perder tempo e dinheiro.
           </h2>
           <p style={{ color: '#666', fontSize: '17px', maxWidth: '520px', margin: '0 auto', lineHeight: 1.65 }}>
             Sem precisar de saber o que é IA, sem escolher ferramentas, sem preparar nada.<br />
@@ -94,7 +94,7 @@ export default function AilyxAudit() {
                   Começar o diagnóstico →
                 </a>
                 <p style={{ textAlign: 'center', marginTop: '10px', fontSize: '12px', color: '#aaa', marginBottom: 0 }}>
-                  Gratuito · 7 dias · Sem compromisso
+                  Gratuito · 60 min · Sem compromisso
                 </p>
               </div>
             </div>
@@ -147,7 +147,7 @@ export default function AilyxAudit() {
             <a href="/diagnostico" className="ayl-btn ayl-btn--primary" style={{ display: 'inline-flex' }}>
               Quero fazer o diagnóstico →
             </a>
-            <p style={{ marginTop: '-12px', fontSize: '12px', color: '#aaa', marginBottom: 0 }}>Gratuito · 7 dias · Sem compromisso</p>
+            <p style={{ marginTop: '-12px', fontSize: '12px', color: '#aaa', marginBottom: 0 }}>Gratuito · 60 min · Sem compromisso</p>
           </div>
 
         </div>
