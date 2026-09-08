@@ -51,12 +51,12 @@ export default function RProblem() {
     <section className="rproblem">
       <div className="r-container">
         <div className="rproblem__top">
-          <p className="r-label anim">Onde Está a Perder</p>
+          <p className="r-label anim">O Problema Real</p>
           <h2 className="r-h2 anim anim--d1">
-            Já perdeu oportunidades<br />esta semana.<br />Provavelmente sem saber.
+            O problema não é falta<br />de ferramentas.<br />É o que acontece entre elas.
           </h2>
           <p className="r-body anim anim--d2">
-            Em cada etapa — do pedido ao pagamento — existe potencial para perder dinheiro. E a maioria acontece em silêncio.
+            A empresa já tem CRM, email, WhatsApp, ERP e calendário. Mas entre uma ferramenta e outra — alguém copia informação, alguém envia um email, alguém se lembra de fazer follow-up. É aí que a capacidade desaparece.
           </p>
         </div>
 
@@ -78,10 +78,10 @@ export default function RProblem() {
 
         <div className="rproblem__bottom anim">
           <p className="rproblem__bottom-text">
-            Cada fuga parece pequena. Em conjunto, são dezenas de milhares de euros por ano a sair pela porta.
+            Cada passo manual parece pequeno. Em conjunto, são dezenas de milhares de euros por ano a sair pela porta — em silêncio.
           </p>
           <p className="rproblem__bottom-sub">
-            A Business Leak Audit™ mapeia o processo completo — receita, operações, faturação, pagamentos — e diz exatamente onde estão os buracos.
+            O Diagnóstico de Execução mapeia os eventos que geram trabalho manual recorrente na sua empresa e calcula quais os fluxos com maior potencial de impacto.
           </p>
         </div>
       </div>

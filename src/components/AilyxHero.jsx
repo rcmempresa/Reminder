@@ -96,15 +96,15 @@ export default function AilyxHero() {
                 lineHeight: 1.04, letterSpacing: '-0.055em',
                 color: '#fff', margin: 0,
               }}>
-                <div className="hero-h1-line"><div className="hero-h1-inner">Faça a sua empresa</div></div>
-                <div className="hero-h1-line"><div className="hero-h1-inner">crescer sem ter de</div></div>
+                <div className="hero-h1-line"><div className="hero-h1-inner">Faça mais com</div></div>
+                <div className="hero-h1-line"><div className="hero-h1-inner">a equipa</div></div>
                 <div className="hero-h1-line">
-                  <div className="hero-h1-inner" style={{ color: '#5aabff' }}>contratar ao mesmo ritmo.</div>
+                  <div className="hero-h1-inner" style={{ color: '#5aabff' }}>que já tem.</div>
                 </div>
               </h1>
 
               <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '17px', lineHeight: 1.7, maxWidth: '480px', margin: 0 }}>
-                Identificamos onde a sua empresa perde tempo e capacidade — e construímos sistemas que fazem o trabalho repetitivo desaparecer.
+                A Remindr transforma eventos da sua empresa em ações executadas automaticamente — desde novos leads e orçamentos até follow-ups, tarefas e processos administrativos.
               </p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
@@ -120,7 +120,7 @@ export default function AilyxHero() {
                   onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 14px 40px rgba(33,127,241,0.55)' }}
                   onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 32px rgba(33,127,241,0.45)' }}
                 >
-                  Descobrir a minha maior oportunidade →
+                  Descobrir onde podemos criar impacto →
                 </a>
               </div>
 
@@ -149,7 +149,7 @@ export default function AilyxHero() {
           <div className="ayl-hero-trustbar" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', padding: '20px 0' }}>
             {[
               { value: '60 min', label: 'para ter clareza' },
-              { value: '30 dias', label: 'sistema a funcionar' },
+              { value: 'Implementação rápida', label: 'conforme âmbito definido' },
               { value: '100% feito por nós', label: 'sem trabalho técnico seu' },
               { value: 'Risco zero', label: 'sem compromisso' },
             ].map((s, i) => (
@@ -173,11 +173,11 @@ export default function AilyxHero() {
 // Hub center in the 440×440 space. Robot head is centered at ~(220,200).
 const HUB_CX = 220, HUB_CY = 200
 const HERO_CARDS = [
-  { label: 'Follow-up enviado', sub: 'há 2s · automático', color: '#5aabff', icon: '↗', px: 290, py: 28,  dur: '2.2s', delay: '0s'   },
-  { label: 'Lead qualificado',  sub: 'Prioridade alta',    color: '#4ade80', icon: '⚡', px: 320, py: 185, dur: '2.8s', delay: '0.5s'  },
-  { label: 'CRM atualizado',    sub: 'Sem tocar em nada',  color: '#a78bfa', icon: '🔄', px: 270, py: 355, dur: '2.0s', delay: '1.0s'  },
-  { label: 'Relatório pronto',  sub: '3 páginas · PDF',    color: '#fb7185', icon: '📊', px: 30,  py: 330, dur: '3.0s', delay: '0.3s'  },
-  { label: 'Resposta em 0.8s',  sub: 'Atendimento live',   color: '#f59e0b', icon: '💬', px: 10,  py: 150, dur: '2.5s', delay: '0.7s'  },
+  { label: 'Novo pedido recebido', sub: 'evento → ação imediata', color: '#5aabff', icon: '📩', px: 290, py: 28,  dur: '2.2s', delay: '0s'   },
+  { label: 'Orçamento gerado',     sub: 'sem intervenção manual', color: '#4ade80', icon: '📄', px: 320, py: 185, dur: '2.8s', delay: '0.5s'  },
+  { label: 'OT criada',            sub: 'após aceitação',         color: '#a78bfa', icon: '🔧', px: 270, py: 355, dur: '2.0s', delay: '1.0s'  },
+  { label: 'Follow-up enviado',    sub: 'no momento certo',       color: '#fb7185', icon: '↗',  px: 30,  py: 330, dur: '3.0s', delay: '0.3s'  },
+  { label: 'Cliente respondido',   sub: 'em segundos',            color: '#f59e0b', icon: '💬', px: 10,  py: 150, dur: '2.5s', delay: '0.7s'  },
 ]
 const heroCx = c => c.px + 80  // card ~160px wide
 const heroCy = c => c.py + 24  // card ~48px tall

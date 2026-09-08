@@ -22,7 +22,7 @@ const STEPS = [
   {
     step: 'Passo 3',
     title: 'Construímos e lançamos',
-    desc: 'Construímos, integramos e testamos tudo. A equipa não toca em nada técnico. Em menos de 30 dias, o sistema está activo.',
+    desc: 'Construímos, integramos e testamos tudo. A equipa não toca em nada técnico. O prazo depende da complexidade e das integrações necessárias.',
     visual: <StepVisual3 />,
     accent: false,
   },
@@ -156,10 +156,10 @@ export default function AilyxSolution() {
           </div>
           <h2 className="ayl-h2" style={{ color: '#0a1c42', marginBottom: '12px' }}>
             Não começamos pela tecnologia.<br />
-            <span style={{ color: '#217FF1' }}>Começamos pelo seu negócio.</span>
+            <span style={{ color: '#217FF1' }}>Começamos pelo que acontece na sua empresa.</span>
           </h2>
           <p style={{ color: '#666', fontSize: '17px', lineHeight: 1.65, maxWidth: '520px' }}>
-            Três passos do diagnóstico ao sistema em produção — sem trabalho técnico da sua parte.
+            Identificamos os eventos que geram trabalho manual, percebemos o que precisa de acontecer a seguir — e construímos o sistema que executa esse processo.
           </p>
         </div>
 

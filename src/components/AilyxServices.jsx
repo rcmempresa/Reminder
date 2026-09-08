@@ -7,12 +7,12 @@ gsap.registerPlugin(ScrollTrigger)
 // Cards with positions inside the 500×440 visual panel
 // Center of logo hub: (250, 220)
 const NODES = [
-  { label: 'Follow-up automático', icon: '↗', color: '#5aabff', px: 28,  py: 32,  dur: '2.2s', delay: '0s'    },
-  { label: 'Relatórios',           icon: '📊', color: '#4ade80', px: 330, py: 18,  dur: '2.8s', delay: '0.4s'  },
-  { label: 'Integrações',          icon: '⚡', color: '#f59e0b', px: 348, py: 188, dur: '1.9s', delay: '0.8s'  },
-  { label: 'CRM automático',       icon: '🔄', color: '#a78bfa', px: 320, py: 358, dur: '2.5s', delay: '0.2s'  },
-  { label: 'Atendimento',          icon: '💬', color: '#34d399', px: 20,  py: 362, dur: '3.1s', delay: '0.6s'  },
-  { label: 'Faturação',            icon: '📄', color: '#fb7185', px: 14,  py: 200, dur: '2.4s', delay: '1.0s'  },
+  { label: 'Novo lead',      icon: '📩', color: '#5aabff', px: 28,  py: 32,  dur: '2.2s', delay: '0s'    },
+  { label: 'Orçamento',      icon: '📄', color: '#4ade80', px: 330, py: 18,  dur: '2.8s', delay: '0.4s'  },
+  { label: 'Follow-up',      icon: '↗',  color: '#f59e0b', px: 348, py: 188, dur: '1.9s', delay: '0.8s'  },
+  { label: 'OT criada',      icon: '🔧', color: '#a78bfa', px: 320, py: 358, dur: '2.5s', delay: '0.2s'  },
+  { label: 'Fatura emitida', icon: '🧾', color: '#34d399', px: 20,  py: 362, dur: '3.1s', delay: '0.6s'  },
+  { label: 'Reativação',     icon: '🔁', color: '#fb7185', px: 14,  py: 200, dur: '2.4s', delay: '1.0s'  },
 ]
 
 // Center of each card (card ≈ 138×40px, so center = px+69, py+20)
@@ -92,13 +92,13 @@ export default function AilyxServices() {
               fontSize: 'clamp(28px, 3.5vw, 52px)',
               color: '#fff', lineHeight: 1.06, letterSpacing: '-0.05em', margin: 0,
             }}>
-              O trabalho manual<br />
-              <span style={{ color: '#5aabff' }}>está a travar</span><br />
-              o crescimento.
+              O problema não é<br />
+              <span style={{ color: '#5aabff' }}>falta de ferramentas.</span><br />
+              É o que acontece entre elas.
             </h2>
 
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '16px', lineHeight: 1.7, maxWidth: '380px', margin: 0 }}>
-              À medida que a empresa cresce, a solução habitual é contratar mais pessoas. Existe uma forma melhor.
+              A empresa já tem CRM, email, WhatsApp e calendário. Mas entre uma ferramenta e outra, alguém copia informação, envia um email, cria uma tarefa. É aí que a capacidade desaparece.
             </p>
 
             <div style={{
@@ -108,8 +108,8 @@ export default function AilyxServices() {
               borderRadius: '12px',
             }}>
               <p style={{ fontSize: '14px', fontWeight: 600, color: 'rgba(255,255,255,0.85)', lineHeight: 1.6, margin: 0 }}>
-                Mais pessoas → mais ferramentas → mais complexidade.<br />
-                <span style={{ color: '#5aabff' }}>A IA resolve isto de outra forma.</span>
+                Evento → alguém tem de se lembrar → trabalho manual → atraso → esquecimento.<br />
+                <span style={{ color: '#5aabff' }}>Com a Remindr: evento → ação executada automaticamente.</span>
               </p>
             </div>
 

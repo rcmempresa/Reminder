@@ -1,20 +1,20 @@
 const phases = [
   {
     num: '01',
-    title: 'Auditoria Do Pedido ao Pagamento',
-    desc: 'Em 60–90 minutos, mapeamos o processo completo — desde o primeiro pedido do cliente até ao pagamento. Analisamos onde estão as fugas de receita, tempo, faturação e produtividade. No final, entrega um relatório com os principais gargalos e a prioridade de resolução.',
+    title: 'Diagnóstico de Execução',
+    desc: 'Em 60 minutos, descobrimos quais os processos que a Remindr pode assumir primeiro. Analisamos os eventos que geram trabalho manual recorrente, identificamos onde existe perda de receita, tempo e capacidade — e calculamos quais os fluxos com maior impacto.',
     active: true,
   },
   {
     num: '02',
     title: 'Implementação do Primeiro Sistema',
-    desc: 'Identificamos o maior gargalo. Desenhamos o novo processo. Construímos e colocamos em funcionamento o sistema — integrações, automações, alertas. A sua equipa não configura nada. O prazo objetivo para implementações standard é 14 dias.',
+    desc: 'Identificamos o maior gargalo. Desenhamos o novo processo. Construímos e colocamos em funcionamento o sistema — integrações, automações, alertas. A sua equipa não configura nada. O prazo depende da complexidade e integrações necessárias.',
     active: false,
   },
   {
     num: '03',
     title: 'Gestão Contínua e Expansão',
-    desc: 'Após o lançamento, continuamos responsáveis pela manutenção, otimização e melhoria. À medida que o primeiro sistema está estável, identificamos o próximo gargalo e expandimos — sem forçar nada antes de estar pronto.',
+    desc: 'Após o lançamento, continuamos responsáveis pela manutenção, otimização e melhoria. À medida que o primeiro sistema está estável, identificamos o próximo evento a assumir — e expandimos sem forçar nada antes de estar pronto.',
     active: true,
   },
 ]
@@ -37,10 +37,10 @@ export default function RMechanism() {
         <div className="rmech__top">
           <p className="r-label anim">Como Funciona</p>
           <h2 className="r-h2 anim anim--d1">
-            Três passos.<br />Nada para configurar.
+            Não começamos pela tecnologia.<br />Começamos pelo que acontece<br />na sua empresa.
           </h2>
           <p className="r-body anim anim--d2">
-            Não entregamos ferramentas. Entregamos sistemas em funcionamento. Começamos por perceber onde está a perder — e só depois construímos.
+            Identificamos os eventos que geram trabalho manual, percebemos o que precisa de acontecer a seguir — e construímos o sistema que executa esse processo.
           </p>
         </div>
 

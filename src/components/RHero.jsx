@@ -1,5 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 
+const flowSteps = [
+  'Analisa o pedido',
+  'Recolhe informação',
+  'Atualiza o CRM',
+  'Avisa o responsável',
+  'Inicia o follow-up',
+]
+
 export default function RHero() {
   const navigate = useNavigate()
   const goToAudit = () => navigate('/diagnostico')
@@ -8,24 +16,20 @@ export default function RHero() {
     <section className="rhero">
       <div className="rhero__inner">
         <div className="rhero__label anim">
-          <span className="r-badge r-badge--dark">SISTEMAS DE REVENUE & OPERATIONS PARA AVAC</span>
+          <span className="r-badge r-badge--dark">DIAGNÓSTICO DE EXECUÇÃO</span>
         </div>
 
         <h1 className="r-h1 rhero__headline anim anim--d1">
-          Do Pedido<br />
-          ao Pagamento.<br />
-          Sem fugas.
+          Faça mais com a equipa que já tem.
         </h1>
 
         <p className="rhero__sub anim anim--d2">
-          A maioria das empresas AVAC não perde por falta de leads.<br />
-          Perde porque entre o pedido e o pagamento existem fugas em cada etapa — e ninguém as fecha.<br />
-          Nós fechamos.
+          A Remindr transforma eventos da sua empresa em ações executadas automaticamente — desde novos leads e orçamentos até follow-ups, tarefas e processos administrativos.
         </p>
 
         <div className="rhero__actions anim anim--d3">
           <button className="r-btn r-btn--primary r-btn--xl" onClick={goToAudit}>
-            Fazer a Auditoria Do Pedido ao Pagamento — Grátis
+            Descobrir onde podemos criar impacto →
           </button>
           <a
             href="#como-funciona"
@@ -37,26 +41,28 @@ export default function RHero() {
         </div>
 
         <p className="rhero__note anim anim--d4">
-          60–90 minutos · Gratuito · Sem compromisso · Para empresas AVAC com processo estabelecido
+          Diagnóstico gratuito · 60 min · Sem compromisso
         </p>
 
-        <div className="rhero__metrics anim anim--d5">
-          <div className="rhero__metric">
-            <div className="rhero__metric-value"><em>13</em></div>
-            <div className="rhero__metric-label">etapas entre o primeiro pedido e o pagamento onde pode existir perda</div>
+        <div className="rhero__flow-panel anim anim--d5">
+          <div className="rhero__flow-event">
+            <span className="rhero__flow-tag">NOVO EVENTO</span>
+            <p className="rhero__flow-trigger">Novo pedido de orçamento</p>
           </div>
-          <div className="rhero__metric">
-            <div className="rhero__metric-value"><em>€0</em></div>
-            <div className="rhero__metric-label">em novos clientes necessários para recuperar receita que já entra mas se perde</div>
+          <div className="rhero__flow-arrow">↓</div>
+          <div className="rhero__flow-engine">
+            <span className="rhero__flow-brand">REMINDR</span>
           </div>
-          <div className="rhero__metric">
-            <div className="rhero__metric-value"><em>60–90 min</em></div>
-            <div className="rhero__metric-label">para mapear o processo completo e identificar os principais gargalos</div>
+          <div className="rhero__flow-arrow">↓</div>
+          <div className="rhero__flow-steps">
+            {flowSteps.map((step, i) => (
+              <div key={i} className="rhero__flow-step">
+                <span className="rhero__flow-check">✓</span>
+                {step}
+              </div>
+            ))}
           </div>
-          <div className="rhero__metric">
-            <div className="rhero__metric-value"><em>14 dias</em></div>
-            <div className="rhero__metric-label">prazo objetivo para o primeiro sistema em funcionamento</div>
-          </div>
+          <p className="rhero__flow-caption">O trabalho acontece. Sem alguém ter de o perseguir.</p>
         </div>
       </div>
     </section>

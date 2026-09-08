@@ -7,39 +7,33 @@ gsap.registerPlugin(ScrollTrigger)
 const DELIVERABLES = [
   {
     num: '01',
-    title: 'Diagnóstico',
-    desc: 'Analisamos os processos críticos da sua empresa e identificamos onde existe maior potencial de melhoria.',
+    title: 'Identificamos',
+    desc: 'Qual é o trabalho que está a acontecer repetidamente na sua empresa? Mapeamos os eventos que geram trabalho manual recorrente.',
     detail: '60 min · Gratuito',
   },
   {
     num: '02',
-    title: 'Mapa de prioridades',
-    desc: 'Cada oportunidade avaliada por impacto, complexidade e retorno. Uma visão clara do que fazer primeiro.',
+    title: 'Quantificamos',
+    desc: 'Quanto tempo, dinheiro ou capacidade está envolvido em cada fluxo? Cada oportunidade avaliada por impacto e complexidade.',
     detail: 'Priorização por impacto e retorno',
   },
   {
     num: '03',
-    title: 'Plano de implementação',
-    desc: 'Desenhamos como a solução deve funcionar antes de construir — processos, integrações e lógica necessária.',
-    detail: 'Arquitetura e plano detalhado',
+    title: 'Priorizamos',
+    desc: 'O que vale a pena assumir primeiro? Entregamos um plano claro com o fluxo de maior impacto imediato para o seu negócio.',
+    detail: 'Plano de execução definido',
   },
   {
     num: '04',
-    title: 'Implementação completa',
-    desc: 'Construímos, configuramos, integramos e testamos tudo. A sua equipa não toca em nada técnico.',
-    detail: 'Construção, integrações e testes',
+    title: 'Construímos',
+    desc: 'Implementamos o sistema de ponta a ponta — integrações, automações e lógica. A equipa não toca em nada técnico.',
+    detail: 'Prazo conforme âmbito definido',
   },
   {
     num: '05',
-    title: 'Lançamento',
-    desc: 'Colocamos o sistema a funcionar e acompanhamos o arranque para garantir que tudo corre bem no contexto real.',
-    detail: 'Validação e arranque',
-  },
-  {
-    num: '06',
-    title: 'Melhoria contínua',
-    desc: 'Depois do lançamento, medimos, corrigimos e melhoramos. E identificamos a próxima oportunidade.',
-    detail: 'Monitorização e evolução',
+    title: 'Medimos',
+    desc: 'Comparamos o antes e o depois. Medimos o impacto real — tempo recuperado, receita protegida, capacidade libertada.',
+    detail: 'Antes vs. depois documentado',
   },
 ]
 
@@ -79,7 +73,7 @@ export default function AilyxIncludes() {
               Começar o diagnóstico →
             </a>
             <p style={{ marginTop: '12px', fontSize: '12px', color: '#bbb', marginBottom: 0 }}>
-              Gratuito · 7 dias · Sem compromisso
+              Gratuito · 60 min · Sem compromisso
             </p>
           </div>
 

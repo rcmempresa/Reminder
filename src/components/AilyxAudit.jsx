@@ -50,15 +50,14 @@ export default function AilyxAudit() {
             background: '#217FF1', borderRadius: '100px', padding: '6px 18px', marginBottom: '20px',
           }}>
             <span style={{ fontSize: '11px', fontWeight: 700, color: 'white', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Passo 1 — Diagnóstico gratuito
+              Passo 1 — Diagnóstico de Execução
             </span>
           </div>
           <h2 className="ayl-h2" style={{ marginBottom: '12px', color: '#0a1c42' }}>
-            Descubra numa reunião de 60 min onde a sua empresa<br />está a perder tempo e dinheiro.
+            Descubra numa sessão de 60 min quais os processos<br />que a Remindr pode assumir primeiro.
           </h2>
           <p style={{ color: '#666', fontSize: '17px', maxWidth: '520px', margin: '0 auto', lineHeight: 1.65 }}>
-            Sem precisar de saber o que é IA, sem escolher ferramentas, sem preparar nada.<br />
-            Nós analisamos. Você recebe clareza.
+            Analisamos os eventos que geram trabalho manual recorrente na sua empresa e calculamos quais os fluxos com maior potencial de impacto imediato.
           </p>
         </div>
 
