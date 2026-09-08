@@ -92,19 +92,16 @@ export default function AilyxHero() {
 
                 <h1 className="hero-h1" style={{
                 fontFamily: 'Sora, sans-serif', fontWeight: 700,
-                fontSize: 'clamp(26px, 3.2vw, 46px)',
-                lineHeight: 1.04, letterSpacing: '-0.055em',
+                fontSize: 'clamp(26px, 3vw, 44px)',
+                lineHeight: 1.1, letterSpacing: '-0.045em',
                 color: '#fff', margin: 0,
               }}>
-                <div className="hero-h1-line"><div className="hero-h1-inner">Faça mais com</div></div>
-                <div className="hero-h1-line"><div className="hero-h1-inner">a equipa</div></div>
-                <div className="hero-h1-line">
-                  <div className="hero-h1-inner" style={{ color: '#5aabff' }}>que já tem.</div>
-                </div>
+                Transforme o trabalho que está a sobrecarregar a sua equipa em sistemas de IA —{' '}
+                <span style={{ color: '#5aabff' }}>e cresça sem contratar ao mesmo ritmo.</span>
               </h1>
 
               <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '17px', lineHeight: 1.7, maxWidth: '480px', margin: 0 }}>
-                A Remindr transforma eventos da sua empresa em ações executadas automaticamente — desde novos leads e orçamentos até follow-ups, tarefas e processos administrativos.
+                Encontramos os workflows que estão a consumir mais tempo e dinheiro, construímos sistemas para os executar automaticamente e medimos o impacto real no negócio.
               </p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
