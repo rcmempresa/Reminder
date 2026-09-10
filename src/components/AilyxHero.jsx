@@ -96,8 +96,8 @@ export default function AilyxHero() {
                 lineHeight: 1.1, letterSpacing: '-0.045em',
                 color: '#fff', margin: 0,
               }}>
-                Transforme o trabalho que está a sobrecarregar a sua equipa em sistemas de IA —{' '}
-                <span style={{ color: '#5aabff' }}>e cresça sem contratar ao mesmo ritmo.</span>
+                Faça a sua empresa crescer{' '}
+                <span style={{ color: '#5aabff' }}>sem depender de mais pessoas.</span>
               </h1>
 
               <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '17px', lineHeight: 1.7, maxWidth: '480px', margin: 0 }}>
