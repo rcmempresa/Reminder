@@ -109,7 +109,7 @@ export default function AilyxServices() {
             }}>
               <p style={{ fontSize: '14px', fontWeight: 600, color: 'rgba(255,255,255,0.85)', lineHeight: 1.6, margin: 0 }}>
                 Evento → alguém tem de se lembrar → trabalho manual → atraso → esquecimento.<br />
-                <span style={{ color: '#5aabff' }}>Com a Remindr: evento → ação executada automaticamente.</span>
+                <span style={{ color: '#5aabff' }}>Com a Reminder: evento → ação executada automaticamente.</span>
               </p>
             </div>
 

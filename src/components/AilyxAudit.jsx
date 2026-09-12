@@ -54,7 +54,7 @@ export default function AilyxAudit() {
             </span>
           </div>
           <h2 className="ayl-h2" style={{ marginBottom: '12px', color: '#0a1c42' }}>
-            Descubra numa sessão de 60 min quais os processos<br />que a Remindr pode assumir primeiro.
+            Descubra numa sessão de 60 min quais os processos<br />que a Reminder pode assumir primeiro.
           </h2>
           <p style={{ color: '#666', fontSize: '17px', maxWidth: '520px', margin: '0 auto', lineHeight: 1.65 }}>
             Analisamos os eventos que geram trabalho manual recorrente na sua empresa e calculamos quais os fluxos com maior potencial de impacto imediato.

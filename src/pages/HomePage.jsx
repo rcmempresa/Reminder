@@ -1,4 +1,5 @@
 import AilyxHero      from '../components/AilyxHero'
+import LogoTicker    from '../components/LogoTicker'
 import AilyxServices  from '../components/AilyxServices'
 import AilyxSolution  from '../components/AilyxSolution'
 import AilyxAudit     from '../components/AilyxAudit'
@@ -16,13 +17,14 @@ export default function HomePage() {
     <>
       <main>
         <AilyxHero />       {/* 1 · Dream outcome */}
+        <LogoTicker />      {/* 1b · Social proof logos */}
         <AilyxServices />   {/* 2 · Problema */}
         <AilyxSolution />   {/* 3 · Diferenciação */}
         <AilyxAudit />      {/* 4 · A oferta */}
         <AilyxIncludes />   {/* 5 · O que inclui */}
         <AilyxOutcomes />   {/* 6 · Antes / Depois */}
         <AilyxForWho />     {/* 7 · Qualificação */}
-        <AilyxProof />      {/* 8 · Prova social */}
+        {/* <AilyxProof /> */}  {/* 8 · Prova social — temporariamente desativado */}
         <AilyxGuarantee />  {/* 9 · Risco zero */}
         <CsFaq />           {/* 10 · Objeções */}
         <AilyxFooterCTA />  {/* 11 · Push final */}

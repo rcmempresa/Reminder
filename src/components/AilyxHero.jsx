@@ -80,7 +80,7 @@ export default function AilyxHero() {
         display: 'flex',
         alignItems: 'center',
         width: '100%',
-        padding: 'calc(var(--nav-h) + 32px) 0 40px',
+        padding: 'calc(var(--nav-h) + var(--bar-h, 0px) + 32px) 0 40px',
         position: 'relative',
         zIndex: 2,
       }}>
@@ -96,12 +96,11 @@ export default function AilyxHero() {
                 lineHeight: 1.1, letterSpacing: '-0.045em',
                 color: '#fff', margin: 0,
               }}>
-                Faça a sua empresa crescer{' '}
-                <span style={{ color: '#5aabff' }}>sem depender de mais pessoas.</span>
+                Faça a sua empresa crescer sem contratar mais pessoas.
               </h1>
 
               <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '17px', lineHeight: 1.7, maxWidth: '480px', margin: 0 }}>
-                Encontramos os workflows que estão a consumir mais tempo e dinheiro, construímos sistemas para os executar automaticamente e medimos o impacto real no negócio.
+                Identificamos os processos que estão a consumir mais tempo e dinheiro, transformamo-los em sistemas automatizados com IA e medimos o impacto real no seu negócio.
               </p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
@@ -135,33 +134,6 @@ export default function AilyxHero() {
         </div>
       </div>
 
-      {/* Trust bar */}
-      <div style={{
-        position: 'relative', zIndex: 2, width: '100%',
-        borderTop: '1px solid rgba(255,255,255,0.07)',
-        background: 'rgba(255,255,255,0.03)',
-        backdropFilter: 'blur(10px)',
-      }}>
-        <div className="ayl-container">
-          <div className="ayl-hero-trustbar" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', padding: '20px 0' }}>
-            {[
-              { value: '60 min', label: 'para ter clareza' },
-              { value: 'Implementação rápida', label: 'conforme âmbito definido' },
-              { value: '100% feito por nós', label: 'sem trabalho técnico seu' },
-              { value: 'Risco zero', label: 'sem compromisso' },
-            ].map((s, i) => (
-              <div key={i} style={{
-                textAlign: 'center',
-                borderRight: i < 3 ? '1px solid rgba(255,255,255,0.07)' : 'none',
-                padding: '4px 0',
-              }}>
-                <div style={{ fontFamily: 'Sora, sans-serif', fontWeight: 700, fontSize: '15px', color: '#fff', letterSpacing: '-0.02em' }}>{s.value}</div>
-                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginTop: '3px' }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
     </section>
   )
@@ -170,11 +142,11 @@ export default function AilyxHero() {
 // Hub center in the 440×440 space. Robot head is centered at ~(220,200).
 const HUB_CX = 220, HUB_CY = 200
 const HERO_CARDS = [
-  { label: 'Novo pedido recebido', sub: 'evento → ação imediata', color: '#5aabff', icon: '📩', px: 290, py: 28,  dur: '2.2s', delay: '0s'   },
-  { label: 'Orçamento gerado',     sub: 'sem intervenção manual', color: '#4ade80', icon: '📄', px: 320, py: 185, dur: '2.8s', delay: '0.5s'  },
-  { label: 'OT criada',            sub: 'após aceitação',         color: '#a78bfa', icon: '🔧', px: 270, py: 355, dur: '2.0s', delay: '1.0s'  },
+  { label: 'Novo lead recebido',   sub: 'respondido em segundos', color: '#5aabff', icon: '📩', px: 290, py: 28,  dur: '2.2s', delay: '0s'   },
+  { label: 'Proposta enviada',     sub: 'sem intervenção manual', color: '#4ade80', icon: '📄', px: 320, py: 185, dur: '2.8s', delay: '0.5s'  },
+  { label: 'Reunião marcada',      sub: 'automaticamente',        color: '#a78bfa', icon: '📅', px: 270, py: 355, dur: '2.0s', delay: '1.0s'  },
   { label: 'Follow-up enviado',    sub: 'no momento certo',       color: '#fb7185', icon: '↗',  px: 30,  py: 330, dur: '3.0s', delay: '0.3s'  },
-  { label: 'Cliente respondido',   sub: 'em segundos',            color: '#f59e0b', icon: '💬', px: 10,  py: 150, dur: '2.5s', delay: '0.7s'  },
+  { label: 'Cliente atendido',     sub: 'sem espera',             color: '#f59e0b', icon: '💬', px: 10,  py: 150, dur: '2.5s', delay: '0.7s'  },
 ]
 const heroCx = c => c.px + 80  // card ~160px wide
 const heroCy = c => c.py + 24  // card ~48px tall
