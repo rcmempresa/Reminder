@@ -1,8 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import compression from 'vite-plugin-compression'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    compression({ algorithm: 'gzip' }),
+    compression({ algorithm: 'brotliCompress', ext: '.br' }),
+  ],
   server: {
     proxy: {
       '/api': {
@@ -13,5 +18,16 @@ export default defineConfig({
   },
   resolve: {
     dedupe: ['react', 'react-dom', 'react-router-dom'],
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          gsap: ['gsap'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
   },
 })

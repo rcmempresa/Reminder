@@ -1,0 +1,37 @@
+# Reminder AI
+
+> Sistemas de IA que assumem o trabalho manual da sua empresa — para crescer sem contratar mais pessoas.
+
+A Reminder AI é uma empresa portuguesa de automação de processos com inteligência artificial. Trabalhamos com empresas de serviços, comércio e operações que querem crescer sem aumentar a equipa ao mesmo ritmo.
+
+## O que fazemos
+
+- Identificamos os processos que consomem mais tempo e dinheiro em cada empresa
+- Construímos sistemas de IA que executam esses processos automaticamente
+- Medimos o impacto real antes e depois da implementação
+
+## Como funciona
+
+1. **Diagnóstico de Execução** (gratuito, 60 min): mapeamos eventos que geram trabalho manual recorrente
+2. **Priorização**: calculamos impacto e complexidade de cada fluxo
+3. **Construção**: implementamos o sistema de ponta a ponta — a equipa não toca em nada técnico
+4. **Medição**: comparamos antes vs. depois em tempo recuperado e receita protegida
+
+## Exemplos de automações
+
+- Follow-up automático de propostas e orçamentos
+- Resposta a leads em segundos, sem intervenção humana
+- Agendamento automático de reuniões
+- Relatórios e faturas gerados automaticamente após conclusão de trabalhos
+- Sequências de reativação de clientes inativos
+
+## Clientes
+
+Empresas como RD Power Nutrition, NR Techsolución, JPC Rodrigues e J&J Bespoke Travel já trabalham com a Reminder AI.
+
+## Contacto e diagnóstico gratuito
+
+- Website: https://remindr-ai.com
+- Diagnóstico gratuito: https://remindr-ai.com/diagnostico
+- País: Portugal
+- Idioma: Português (Portugal)
