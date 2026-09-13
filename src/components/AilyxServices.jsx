@@ -50,33 +50,79 @@ const PAINS = [
 ]
 
 export default function AilyxServices() {
-  const headRef  = useRef(null)
-  const cardsRef = useRef([])
+  const sectionRef = useRef(null)
+  const trackRef   = useRef(null)
+  const headRef    = useRef(null)
 
   useEffect(() => {
-    if (window.innerWidth <= 768) return
+    // Mobile: simple stagger entrance, no horizontal scroll
+    if (window.innerWidth <= 768) {
+      const ctx = gsap.context(() => {
+        gsap.from(headRef.current.children, {
+          y: 24, opacity: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1,
+          scrollTrigger: { trigger: headRef.current, start: 'top 80%', once: true },
+        })
+        gsap.from(Array.from(trackRef.current.children), {
+          y: 32, opacity: 0, duration: 0.65, ease: 'power3.out', stagger: 0.08,
+          scrollTrigger: { trigger: trackRef.current, start: 'top 78%', once: true },
+        })
+      })
+      return () => ctx.revert()
+    }
+
+    // Desktop: horizontal scroll
     const ctx = gsap.context(() => {
       gsap.from(headRef.current.children, {
-        y: 28, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1,
-        scrollTrigger: { trigger: headRef.current, start: 'top 78%', once: true },
+        y: 24, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1,
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true },
       })
-      cardsRef.current.filter(Boolean).forEach((card, i) => {
-        gsap.from(card, {
-          y: 48, opacity: 0, duration: 0.7, ease: 'power3.out',
-          delay: i * 0.07,
-          scrollTrigger: { trigger: headRef.current, start: 'top 72%', once: true },
-        })
+
+      const track = trackRef.current
+      const getDistance = () => track.scrollWidth - window.innerWidth + 120
+
+      const tween = gsap.to(track, {
+        x: () => -getDistance(),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: () => `+=${getDistance()}`,
+          scrub: 1.4,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      })
+
+      // Each card enters from the right as track moves
+      Array.from(track.children).forEach((card) => {
+        gsap.fromTo(card,
+          { opacity: 0, scale: 0.88, y: 20 },
+          {
+            opacity: 1, scale: 1, y: 0,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              containerAnimation: tween,
+              start: 'left right',
+              end: 'left 58%',
+              scrub: true,
+            },
+          }
+        )
       })
     })
     return () => ctx.revert()
   }, [])
 
   return (
-    <section style={{ background: '#fff', padding: 'clamp(80px, 10vw, 120px) 0', borderTop: '1px solid #e8edf5' }}>
-      <div className="ayl-container">
-
-        {/* Header */}
-        <div ref={headRef} style={{ textAlign: 'center', marginBottom: '52px' }}>
+    <section
+      ref={sectionRef}
+      style={{ background: '#fff', borderTop: '1px solid #e8edf5', overflow: 'hidden' }}
+    >
+      {/* Header — stays fixed during horizontal scroll */}
+      <div className="ayl-container" style={{ paddingTop: 'clamp(80px, 10vw, 120px)', paddingBottom: '48px' }}>
+        <div ref={headRef}>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
             background: '#FEF2F2', border: '1px solid rgba(248,113,113,0.3)',
@@ -86,101 +132,79 @@ export default function AilyxServices() {
               O problema
             </span>
           </div>
-          <h2 className="ayl-h2" style={{ color: '#0a1c42', marginBottom: '16px' }}>
-            A empresa cresce.<br />
-            <span style={{ color: '#217FF1' }}>A equipa afoga-se em trabalho manual.</span>
-          </h2>
-          <p style={{ color: '#666', fontSize: '17px', lineHeight: 1.7, maxWidth: '500px', margin: '0 auto' }}>
-            Cada vez que algo acontece na empresa — um lead, uma proposta, um pedido — alguém tem de se lembrar de agir. É aí que o dinheiro e o tempo desaparecem.
-          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', alignItems: 'end' }}>
+            <h2 className="ayl-h2" style={{ color: '#0a1c42', margin: 0 }}>
+              A empresa cresce.<br />
+              <span style={{ color: '#217FF1' }}>A equipa afoga-se em trabalho manual.</span>
+            </h2>
+            <p style={{ color: '#888', fontSize: '15px', lineHeight: 1.7, margin: 0 }}>
+              Cada vez que algo acontece — um lead, uma proposta, um pedido — alguém tem de se lembrar de agir. É aí que o dinheiro desaparece.
+            </p>
+          </div>
         </div>
+      </div>
 
-        {/* Pain cards grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-          {PAINS.map((pain, i) => (
-            <div
-              key={i}
-              ref={el => cardsRef.current[i] = el}
-              className="ayl-card--hover"
-              style={{
-                background: '#F8FAFF',
-                border: '1.5px solid #e8edf5',
-                borderRadius: '16px',
-                padding: '24px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
-              }}
-            >
-              <div style={{
-                width: 40, height: 40, borderRadius: '10px',
-                background: `${pain.color}15`,
-                border: `1px solid ${pain.color}30`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '20px', flexShrink: 0,
-              }}>
-                {pain.icon}
-              </div>
-              <div>
-                <div style={{ fontFamily: 'Sora, sans-serif', fontWeight: 700, fontSize: '14px', color: '#0a1c42', marginBottom: '6px', lineHeight: 1.3 }}>
-                  {pain.title}
-                </div>
-                <p style={{ fontSize: '13px', color: '#777', lineHeight: 1.6, margin: 0 }}>
-                  {pain.desc}
-                </p>
-              </div>
-              <div style={{
-                marginTop: 'auto',
-                fontSize: '11px', fontWeight: 600,
-                color: pain.color,
-                background: `${pain.color}10`,
-                borderRadius: '8px',
-                padding: '8px 10px',
-                lineHeight: 1.4,
-              }}>
-                {pain.metric}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Bridge to solution */}
-        <div style={{
-          marginTop: '56px',
-          padding: '32px 40px',
-          background: '#06102a',
-          borderRadius: '20px',
+      {/* Horizontal scrolling track */}
+      <div
+        ref={trackRef}
+        style={{
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '32px',
-          flexWrap: 'wrap',
-        }}>
-          <div>
-            <div style={{ fontFamily: 'Sora, sans-serif', fontWeight: 700, fontSize: 'clamp(18px, 2vw, 24px)', color: '#fff', marginBottom: '8px', letterSpacing: '-0.03em' }}>
-              Evento → alguém tem de se lembrar → trabalho manual → atraso → esquecimento.
+          flexDirection: 'row',
+          gap: '16px',
+          paddingLeft: 'max(calc((100vw - 1200px) / 2), 40px)',
+          paddingRight: '200px',
+          paddingBottom: 'clamp(80px, 10vw, 120px)',
+          willChange: 'transform',
+          // Mobile: wrap normally
+          flexWrap: window.innerWidth <= 768 ? 'wrap' : 'nowrap',
+        }}
+      >
+        {PAINS.map((pain, i) => (
+          <div
+            key={i}
+            style={{
+              flexShrink: 0,
+              width: 'clamp(300px, 32vw, 380px)',
+              background: '#F8FAFF',
+              border: '1.5px solid #e8edf5',
+              borderRadius: '20px',
+              padding: '28px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '14px',
+            }}
+          >
+            <div style={{
+              width: 44, height: 44, borderRadius: '12px',
+              background: `${pain.color}15`,
+              border: `1px solid ${pain.color}30`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '22px', flexShrink: 0,
+            }}>
+              {pain.icon}
             </div>
-            <div style={{ fontSize: '15px', color: '#5aabff', fontWeight: 600 }}>
-              Com a Reminder: evento → ação executada automaticamente.
+            <div>
+              <div style={{ fontFamily: 'Sora, sans-serif', fontWeight: 700, fontSize: '15px', color: '#0a1c42', marginBottom: '8px', lineHeight: 1.3 }}>
+                {pain.title}
+              </div>
+              <p style={{ fontSize: '13.5px', color: '#777', lineHeight: 1.65, margin: 0 }}>
+                {pain.desc}
+              </p>
+            </div>
+            <div style={{
+              marginTop: 'auto',
+              fontSize: '12px', fontWeight: 700,
+              color: pain.color,
+              background: `${pain.color}10`,
+              border: `1px solid ${pain.color}25`,
+              borderRadius: '10px',
+              padding: '10px 12px',
+              lineHeight: 1.4,
+            }}>
+              {pain.metric}
             </div>
           </div>
-          <a href="/diagnostico" style={{
-            flexShrink: 0,
-            background: '#217FF1', color: '#fff',
-            fontFamily: 'Sora, sans-serif', fontWeight: 700,
-            fontSize: '14px', padding: '14px 28px',
-            borderRadius: '12px', textDecoration: 'none',
-            display: 'inline-flex', alignItems: 'center',
-            whiteSpace: 'nowrap',
-            transition: 'transform 0.18s ease',
-          }}
-            onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
-            onMouseLeave={e => e.currentTarget.style.transform = ''}
-          >
-            Ver como funciona →
-          </a>
-        </div>
-
+        ))}
       </div>
     </section>
   )

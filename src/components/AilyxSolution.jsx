@@ -53,11 +53,51 @@ export default function AilyxSolution() {
         y: 32, opacity: 0, duration: 0.85, ease: 'power3.out', stagger: 0.1,
         scrollTrigger: { trigger: headRef.current, start: 'top 76%', once: true },
       })
+
+      // Initial state: all steps dim
+      stepsRef.current.filter(Boolean).forEach((el) => {
+        gsap.set(el, { opacity: 0.28 })
+      })
+
+      // Entrance: slide up on first sight
       stepsRef.current.filter(Boolean).forEach((el, i) => {
         gsap.from(el, {
-          y: 36, opacity: 0, duration: 0.75, ease: 'power3.out', delay: i * 0.08,
-          scrollTrigger: { trigger: el, start: 'top 86%', once: true },
+          y: 40, duration: 0.7, ease: 'power3.out', delay: i * 0.06,
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true },
         })
+      })
+
+      // Scrub: each step brightens as it enters center of viewport
+      stepsRef.current.filter(Boolean).forEach((el) => {
+        gsap.to(el, {
+          opacity: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 72%',
+            end: 'top 38%',
+            scrub: 0.8,
+          },
+        })
+        // Fade back out as it leaves
+        gsap.to(el, {
+          opacity: 0.35,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el,
+            start: 'bottom 50%',
+            end: 'bottom 20%',
+            scrub: 0.8,
+          },
+        })
+      })
+      // Keep last step fully visible
+      const last = stepsRef.current.filter(Boolean).slice(-1)[0]
+      if (last) ScrollTrigger.create({
+        trigger: last,
+        start: 'top 38%',
+        onEnter: () => gsap.set(last, { opacity: 1 }),
+        onLeaveBack: () => gsap.set(last, { opacity: 0.28 }),
       })
     })
     return () => ctx.revert()

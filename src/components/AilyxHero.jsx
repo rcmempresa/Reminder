@@ -1,7 +1,11 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function AilyxHero() {
+  const heroRef    = useRef(null)
   const contentRef = useRef(null)
   const robotRef   = useRef(null)
 
@@ -9,6 +13,7 @@ export default function AilyxHero() {
     const el = contentRef.current
     if (!el) return
 
+    // — Entrance animations —
     const lines    = Array.from(el.querySelectorAll('.hero-h1-inner'))
     const siblings = Array.from(el.children).filter(c => !c.classList.contains('hero-h1'))
 
@@ -17,7 +22,6 @@ export default function AilyxHero() {
     gsap.set(siblings, { y: 28, opacity: 0 })
     gsap.to(siblings, { y: 0, opacity: 1, duration: 0.95, ease: 'power3.out', stagger: 0.11, delay: 0.6 })
 
-    // Robot entrance + float
     if (robotRef.current) {
       gsap.fromTo(robotRef.current,
         { x: 60, opacity: 0 },
@@ -25,10 +29,34 @@ export default function AilyxHero() {
       )
       gsap.to(robotRef.current, { y: -14, duration: 3.5, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 2.2 })
     }
+
+    // — Scroll-out parallax (desktop only) —
+    if (window.innerWidth > 768) {
+      gsap.to(contentRef.current, {
+        y: -90, opacity: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: '55% top',
+          scrub: 1.2,
+        },
+      })
+      gsap.to(robotRef.current, {
+        y: -140, opacity: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: '65% top',
+          scrub: 1.5,
+        },
+      })
+    }
   }, [])
 
   return (
-    <section style={{
+    <section ref={heroRef} style={{
       position: 'relative',
       width: '100%',
       minHeight: '100vh',
