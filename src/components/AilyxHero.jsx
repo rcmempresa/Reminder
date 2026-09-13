@@ -99,8 +99,8 @@ export default function AilyxHero() {
                 Faça a sua empresa crescer sem contratar mais pessoas.
               </h1>
 
-              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '17px', lineHeight: 1.7, maxWidth: '480px', margin: 0 }}>
-                Identificamos os processos que estão a consumir mais tempo e dinheiro, transformamo-los em sistemas automatizados com IA e medimos o impacto real no seu negócio.
+              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '17px', lineHeight: 1.7, maxWidth: '500px', margin: 0 }}>
+                Identificamos onde a sua equipa está a perder tempo, dinheiro e capacidade — e transformamos esses processos em sistemas automatizados com IA que trabalham por si. Medimos o impacto real em horas poupadas, custos reduzidos e capacidade recuperada.
               </p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
