@@ -4,6 +4,36 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const GUARANTEES = [
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    ),
+    title: 'Diagnóstico sem risco',
+    body: '60 minutos gratuitos. Recebe o mapa completo da empresa — independentemente de avançar ou não.',
+  },
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    ),
+    title: 'Implementação garantida',
+    body: 'Se o sistema não estiver funcional dentro do prazo acordado, continuamos até estar. Sem custo adicional.',
+  },
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="9 10 4 15 9 20"/><path d="M20 4v7a4 4 0 0 1-4 4H4"/>
+      </svg>
+    ),
+    title: 'Devolução total em 90 dias',
+    body: 'Se em 90 dias o sistema não estiver a funcionar conforme o âmbito definido, devolvemos 100% do valor pago.',
+  },
+]
+
 export default function AilyxGuarantee() {
   const ref = useRef(null)
 
@@ -23,7 +53,6 @@ export default function AilyxGuarantee() {
       <div className="ayl-container">
         <div ref={ref} style={{ display: 'flex', flexDirection: 'column', gap: '48px', alignItems: 'center', textAlign: 'center' }}>
 
-          {/* Label */}
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
             background: 'rgba(74,222,128,0.1)', border: '1px solid rgba(74,222,128,0.25)',
@@ -34,7 +63,6 @@ export default function AilyxGuarantee() {
             </span>
           </div>
 
-          {/* Main statement */}
           <div style={{ maxWidth: '720px' }}>
             <h2 style={{
               fontFamily: 'Sora, sans-serif', fontWeight: 700,
@@ -50,25 +78,8 @@ export default function AilyxGuarantee() {
             </p>
           </div>
 
-          {/* 3 promise cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', width: '100%', textAlign: 'left' }}>
-            {[
-              {
-                icon: '🔍',
-                title: 'Diagnóstico sem risco',
-                body: '60 minutos gratuitos. Recebe o mapa completo da empresa — independentemente de avançar ou não.',
-              },
-              {
-                icon: '⚙️',
-                title: 'Implementação garantida',
-                body: 'Se o sistema não estiver funcional dentro do prazo acordado, continuamos até estar. Sem custo adicional.',
-              },
-              {
-                icon: '↩️',
-                title: 'Devolução total em 90 dias',
-                body: 'Se em 90 dias o sistema não estiver a funcionar conforme o âmbito definido, devolvemos 100% do valor pago.',
-              },
-            ].map((g, i) => (
+            {GUARANTEES.map((g, i) => (
               <div key={i} style={{
                 background: 'rgba(255,255,255,0.04)',
                 border: '1px solid rgba(255,255,255,0.08)',
@@ -78,7 +89,7 @@ export default function AilyxGuarantee() {
                 flexDirection: 'column',
                 gap: '12px',
               }}>
-                <div style={{ fontSize: '24px' }}>{g.icon}</div>
+                <div style={{ color: '#5aabff' }}>{g.icon}</div>
                 <div style={{ fontFamily: 'Sora, sans-serif', fontWeight: 700, fontSize: '15px', color: '#fff' }}>
                   {g.title}
                 </div>
@@ -89,7 +100,6 @@ export default function AilyxGuarantee() {
             ))}
           </div>
 
-          {/* CTA */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
             <a
               href="/diagnostico"

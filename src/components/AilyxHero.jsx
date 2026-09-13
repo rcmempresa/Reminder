@@ -198,12 +198,20 @@ export default function AilyxHero() {
 
 // Hub center in the 440×440 space. Robot head is centered at ~(220,200).
 const HUB_CX = 220, HUB_CY = 200
+const CardIcon = ({ path, path2, poly }) => (
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    {path  && <path d={path} />}
+    {path2 && <path d={path2} />}
+    {poly  && <polyline points={poly} />}
+  </svg>
+)
+
 const HERO_CARDS = [
-  { label: 'Novo lead recebido',   sub: 'respondido em segundos', color: '#5aabff', icon: '📩', px: 290, py: 28,  dur: '2.2s', delay: '0s'   },
-  { label: 'Proposta enviada',     sub: 'sem intervenção manual', color: '#4ade80', icon: '📄', px: 320, py: 185, dur: '2.8s', delay: '0.5s'  },
-  { label: 'Reunião marcada',      sub: 'automaticamente',        color: '#a78bfa', icon: '📅', px: 270, py: 355, dur: '2.0s', delay: '1.0s'  },
-  { label: 'Follow-up enviado',    sub: 'no momento certo',       color: '#fb7185', icon: '↗',  px: 30,  py: 330, dur: '3.0s', delay: '0.3s'  },
-  { label: 'Cliente atendido',     sub: 'sem espera',             color: '#f59e0b', icon: '💬', px: 10,  py: 150, dur: '2.5s', delay: '0.7s'  },
+  { label: 'Novo lead recebido',   sub: 'respondido em segundos', color: '#5aabff', icon: <CardIcon path="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" poly="22,6 12,13 2,6" />, px: 290, py: 28,  dur: '2.2s', delay: '0s'   },
+  { label: 'Proposta enviada',     sub: 'sem intervenção manual', color: '#4ade80', icon: <CardIcon path="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" poly="14,2 14,8 20,8" />, px: 320, py: 185, dur: '2.8s', delay: '0.5s'  },
+  { label: 'Reunião marcada',      sub: 'automaticamente',        color: '#a78bfa', icon: <CardIcon path="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />, px: 270, py: 355, dur: '2.0s', delay: '1.0s'  },
+  { label: 'Follow-up enviado',    sub: 'no momento certo',       color: '#fb7185', icon: <CardIcon path="M5 12h14M12 5l7 7-7 7" />, px: 30,  py: 330, dur: '3.0s', delay: '0.3s'  },
+  { label: 'Cliente atendido',     sub: 'sem espera',             color: '#f59e0b', icon: <CardIcon path="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />, px: 10,  py: 150, dur: '2.5s', delay: '0.7s'  },
 ]
 const heroCx = c => c.px + 80  // card ~160px wide
 const heroCy = c => c.py + 24  // card ~48px tall

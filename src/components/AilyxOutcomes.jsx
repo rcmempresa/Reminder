@@ -24,12 +24,15 @@ const AFTER = [
   'Funciona sempre',
 ]
 
+const svgStroke = (children) => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#217FF1" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">{children}</svg>
+)
 const OUTCOMES = [
-  { icon: '📈', label: 'Vendas',      desc: 'Mais capacidade para acompanhar e converter oportunidades.' },
-  { icon: '🤝', label: 'Clientes',    desc: 'Atendimento mais rápido, sem sobrecarregar a equipa.' },
-  { icon: '⚙️', label: 'Operações',  desc: 'Processos mais rápidos e menos dependentes de intervenção manual.' },
-  { icon: '🗂️', label: 'Administração', desc: 'Menos tempo a copiar, inserir e organizar informação.' },
-  { icon: '🧠', label: 'Decisão',    desc: 'Mais informação disponível para a equipa decidir melhor e mais rápido.' },
+  { icon: svgStroke(<><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></>), label: 'Vendas', desc: 'Mais capacidade para acompanhar e converter oportunidades.' },
+  { icon: svgStroke(<><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></>), label: 'Clientes', desc: 'Atendimento mais rápido, sem sobrecarregar a equipa.' },
+  { icon: svgStroke(<><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></>), label: 'Operações', desc: 'Processos mais rápidos e menos dependentes de intervenção manual.' },
+  { icon: svgStroke(<><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></>), label: 'Administração', desc: 'Menos tempo a copiar, inserir e organizar informação.' },
+  { icon: svgStroke(<><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></>), label: 'Decisão', desc: 'Mais informação disponível para a equipa decidir melhor e mais rápido.' },
 ]
 
 export default function AilyxOutcomes() {
@@ -147,7 +150,7 @@ export default function AilyxOutcomes() {
                 borderRadius: '18px',
                 textAlign: 'center',
               }}>
-                <div style={{ fontSize: '28px', marginBottom: '12px' }}>{o.icon}</div>
+                <div style={{ marginBottom: '12px' }}>{o.icon}</div>
                 <div style={{ fontFamily: 'Sora, sans-serif', fontWeight: 700, fontSize: '13px', color: i === 0 ? '#217FF1' : '#0a1c42', marginBottom: '10px' }}>
                   {o.label}
                 </div>

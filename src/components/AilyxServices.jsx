@@ -4,39 +4,52 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const Ico = ({ d, d2, circle, poly }) => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    {d   && <path d={d} />}
+    {d2  && <path d={d2} />}
+    {circle && <circle cx={circle[0]} cy={circle[1]} r={circle[2]} />}
+    {poly && <polyline points={poly} />}
+  </svg>
+)
+
 const PAINS = [
   {
-    icon: '📩',
+    icon: <Ico d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" poly="22,6 12,13 2,6" />,
     title: 'Leads que não recebem resposta a tempo',
     desc: 'Enquanto a equipa decide quem contacta, o concorrente já fechou.',
     metric: '78% dos leads compram ao primeiro a responder',
   },
   {
-    icon: '📄',
+    icon: <Ico d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" poly="14,2 14,8 20,8" />,
     title: 'Propostas enviadas e esquecidas',
     desc: 'Ninguém faz follow-up porque não há sistema. A oportunidade esfria.',
     metric: 'Até 40% das propostas nunca recebem 2º contacto',
   },
   {
-    icon: '🔁',
+    icon: <Ico d="M23 4 23 10 17 10M1 20 1 14 7 14" d2="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />,
     title: 'A equipa a copiar informação entre sistemas',
     desc: 'CRM, Excel, email, WhatsApp. Alguém está sempre a fazer a ponte manual.',
     metric: 'Média de 5–8h/semana por colaborador',
   },
   {
-    icon: '📊',
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+      </svg>
+    ),
     title: 'Relatórios que demoram horas a preparar',
     desc: 'Dados que podiam estar prontos automaticamente consomem tempo da equipa.',
     metric: 'Trabalho de baixo valor com alto custo de oportunidade',
   },
   {
-    icon: '🧾',
+    icon: <Ico d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" d2="M14 2v6h6M16 13H8M16 17H8" />,
     title: 'Faturação atrasada por falta de processo',
     desc: 'A informação não chega a tempo. O cash flow ressente-se.',
     metric: 'Atraso médio de 7 dias por falta de automação',
   },
   {
-    icon: '💬',
+    icon: <Ico d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />,
     title: 'Clientes inativos que ninguém reativa',
     desc: 'A base de clientes existente é a fonte de receita mais barata — e a mais ignorada.',
     metric: 'Custo de reativação 5x menor que aquisição',
@@ -64,10 +77,8 @@ export default function AilyxServices() {
     }
 
     const ctx = gsap.context(() => {
-      // Heading clip-path reveal
-      const headChildren = Array.from(headRef.current.children)
-      gsap.set(headChildren, { clipPath: 'inset(0 0 100% 0)', y: 12 })
-      gsap.to(headChildren, {
+      gsap.set(headRef.current.children, { clipPath: 'inset(0 0 100% 0)', y: 12 })
+      gsap.to(headRef.current.children, {
         clipPath: 'inset(0 0 0% 0)', y: 0,
         duration: 0.85, ease: 'power3.out', stagger: 0.12,
         scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true },
@@ -115,7 +126,6 @@ export default function AilyxServices() {
       ref={sectionRef}
       style={{ background: '#fff', borderTop: '1px solid #e8edf5', overflow: 'hidden' }}
     >
-      {/* Header */}
       <div className="ayl-container" style={{ paddingTop: 'clamp(80px, 10vw, 120px)', paddingBottom: '48px' }}>
         <div ref={headRef}>
           <div style={{
@@ -139,7 +149,6 @@ export default function AilyxServices() {
         </div>
       </div>
 
-      {/* Horizontal track */}
       <div
         ref={trackRef}
         style={{
@@ -173,7 +182,7 @@ export default function AilyxServices() {
               background: 'rgba(33,127,241,0.07)',
               border: '1px solid rgba(33,127,241,0.12)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '22px', flexShrink: 0,
+              color: '#217FF1', flexShrink: 0,
             }}>
               {pain.icon}
             </div>
