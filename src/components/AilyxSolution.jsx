@@ -49,8 +49,10 @@ export default function AilyxSolution() {
   useEffect(() => {
     if (window.innerWidth <= 768) return
     const ctx = gsap.context(() => {
-      gsap.from(headRef.current.children, {
-        y: 32, opacity: 0, duration: 0.85, ease: 'power3.out', stagger: 0.1,
+      gsap.set(headRef.current.children, { clipPath: 'inset(0 0 100% 0)', y: 10 })
+      gsap.to(headRef.current.children, {
+        clipPath: 'inset(0 0 0% 0)', y: 0,
+        duration: 0.85, ease: 'power3.out', stagger: 0.12,
         scrollTrigger: { trigger: headRef.current, start: 'top 76%', once: true },
       })
 

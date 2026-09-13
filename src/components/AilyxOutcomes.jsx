@@ -38,17 +38,27 @@ export default function AilyxOutcomes() {
   useEffect(() => {
     if (window.innerWidth <= 768) return
     const ctx = gsap.context(() => {
-      gsap.from(ref.current.querySelector('.outcomes-before'), {
-        x: -40, opacity: 0, duration: 0.9, ease: 'power3.out',
+      // Before panel: rows stagger in
+      gsap.from(ref.current.querySelectorAll('.outcomes-before .outcome-row'), {
+        x: -24, opacity: 0, duration: 0.55, ease: 'power2.out', stagger: 0.07,
         scrollTrigger: { trigger: ref.current, start: 'top 78%', once: true },
       })
-      gsap.from(ref.current.querySelector('.outcomes-after'), {
-        x: 40, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.1,
-        scrollTrigger: { trigger: ref.current, start: 'top 78%', once: true },
-      })
+      // Arrow bounce in
       gsap.from(ref.current.querySelector('.outcomes-arrow'), {
-        scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(2)', delay: 0.3,
+        scale: 0, opacity: 0, duration: 0.7, ease: 'back.out(2.5)', delay: 0.25,
         scrollTrigger: { trigger: ref.current, start: 'top 78%', once: true },
+      })
+      // After panel: rows stagger in with slight delay
+      gsap.from(ref.current.querySelectorAll('.outcomes-after .outcome-row'), {
+        x: 24, opacity: 0, duration: 0.55, ease: 'power2.out', stagger: 0.07, delay: 0.15,
+        scrollTrigger: { trigger: ref.current, start: 'top 78%', once: true },
+      })
+      // Outcome cards clip-path reveal
+      gsap.set(ref.current.querySelectorAll('.outcome-card'), { clipPath: 'inset(0 0 100% 0)', y: 16 })
+      gsap.to(ref.current.querySelectorAll('.outcome-card'), {
+        clipPath: 'inset(0 0 0% 0)', y: 0,
+        duration: 0.7, ease: 'power3.out', stagger: 0.08,
+        scrollTrigger: { trigger: ref.current.querySelector('.ayl-outcomes-grid'), start: 'top 80%', once: true },
       })
     })
     return () => ctx.revert()
@@ -84,7 +94,7 @@ export default function AilyxOutcomes() {
               </div>
               <div style={{ padding: '20px 24px' }}>
                 {BEFORE.map((item, i) => (
-                  <div key={i}>
+                  <div key={i} className="outcome-row">
                     <div style={{ padding: '10px 0', fontSize: '14px', color: '#555', textAlign: 'center' }}>{item}</div>
                     {i < BEFORE.length - 1 && (
                       <div style={{ textAlign: 'center', color: '#ddd', fontSize: '16px', lineHeight: 1 }}>↓</div>
@@ -116,7 +126,7 @@ export default function AilyxOutcomes() {
               </div>
               <div style={{ padding: '20px 24px' }}>
                 {AFTER.map((item, i) => (
-                  <div key={i}>
+                  <div key={i} className="outcome-row">
                     <div style={{ padding: '10px 0', fontSize: '14px', color: 'rgba(255,255,255,0.85)', textAlign: 'center', fontWeight: 500 }}>{item}</div>
                     {i < AFTER.length - 1 && (
                       <div style={{ textAlign: 'center', color: 'rgba(144,200,255,0.3)', fontSize: '16px', lineHeight: 1 }}>↓</div>
@@ -130,7 +140,7 @@ export default function AilyxOutcomes() {
           {/* 5 outcome cards */}
           <div className="ayl-outcomes-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '14px' }}>
             {OUTCOMES.map((o, i) => (
-              <div key={i} className="ayl-card--hover" style={{
+              <div key={i} className="ayl-card--hover outcome-card" style={{
                 padding: '24px 20px',
                 background: i === 0 ? '#EEF4FF' : '#F8FAFF',
                 border: `1.5px solid ${i === 0 ? 'rgba(33,127,241,0.2)' : '#e8edf5'}`,

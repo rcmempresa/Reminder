@@ -11,20 +11,82 @@ const PRIORITIES = [
 ]
 
 export default function AilyxAudit() {
-  const leftRef  = useRef(null)
-  const rightRef = useRef(null)
+  const leftRef    = useRef(null)
+  const rightRef   = useRef(null)
+  const headRef    = useRef(null)
+  const statsRef   = useRef([])
+  const metricsRef = useRef([])
 
   useEffect(() => {
     if (window.innerWidth <= 768) return
     const ctx = gsap.context(() => {
+
+      // Heading clip-path reveal
+      gsap.set(headRef.current.children, { clipPath: 'inset(0 0 100% 0)', y: 10 })
+      gsap.to(headRef.current.children, {
+        clipPath: 'inset(0 0 0% 0)', y: 0,
+        duration: 0.85, ease: 'power3.out', stagger: 0.12,
+        scrollTrigger: { trigger: headRef.current, start: 'top 78%', once: true },
+      })
+
+      // Left panel slide in
       gsap.from(leftRef.current, {
-        x: -40, opacity: 0, duration: 0.9, ease: 'power3.out',
+        x: -48, opacity: 0, duration: 1.0, ease: 'power3.out',
         scrollTrigger: { trigger: leftRef.current, start: 'top 75%', once: true },
       })
+      // Left rows stagger
+      gsap.from(leftRef.current.querySelectorAll('.audit-row'), {
+        x: -20, opacity: 0, duration: 0.6, ease: 'power2.out', stagger: 0.07,
+        scrollTrigger: { trigger: leftRef.current, start: 'top 72%', once: true },
+      })
+
+      // Right panel slide in
       gsap.from(rightRef.current, {
-        x: 40, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.1,
+        x: 48, opacity: 0, duration: 1.0, ease: 'power3.out', delay: 0.1,
         scrollTrigger: { trigger: rightRef.current, start: 'top 75%', once: true },
       })
+
+      // Counter animations — stats row (27, 11, 4)
+      const statTargets = [27, 11, 4]
+      statsRef.current.filter(Boolean).forEach((el, i) => {
+        const obj = { val: 0 }
+        gsap.to(obj, {
+          val: statTargets[i],
+          duration: 1.4,
+          ease: 'power2.out',
+          snap: { val: 1 },
+          scrollTrigger: { trigger: el, start: 'top 80%', once: true },
+          onUpdate() { el.textContent = Math.round(obj.val) },
+        })
+      })
+
+      // Counter animations — metrics (€72.000, 1.240)
+      if (metricsRef.current[0]) {
+        const m0 = { val: 0 }
+        gsap.to(m0, {
+          val: 72000,
+          duration: 1.6,
+          ease: 'power2.out',
+          snap: { val: 1000 },
+          scrollTrigger: { trigger: metricsRef.current[0], start: 'top 80%', once: true },
+          onUpdate() {
+            metricsRef.current[0].textContent = '€' + (m0.val / 1000).toFixed(0) + '.000'
+          },
+        })
+      }
+      if (metricsRef.current[1]) {
+        const m1 = { val: 0 }
+        gsap.to(m1, {
+          val: 1240,
+          duration: 1.6,
+          ease: 'power2.out',
+          snap: { val: 10 },
+          scrollTrigger: { trigger: metricsRef.current[1], start: 'top 80%', once: true },
+          onUpdate() {
+            metricsRef.current[1].textContent = m1.val.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+          },
+        })
+      }
     })
     return () => ctx.revert()
   }, [])
@@ -33,13 +95,14 @@ export default function AilyxAudit() {
     <section style={{ background: '#F3F6FB', padding: 'clamp(80px, 10vw, 120px) 0', borderTop: '1px solid #e8edf5' }} id="audit">
       <div className="ayl-container">
 
-        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+        <div ref={headRef} style={{ textAlign: 'center', marginBottom: '64px' }}>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '8px',
-            background: '#217FF1', borderRadius: '100px', padding: '6px 18px', marginBottom: '20px',
+            background: '#EEF4FF', border: '1px solid rgba(33,127,241,0.2)',
+            borderRadius: '100px', padding: '5px 14px', marginBottom: '20px',
           }}>
-            <span style={{ fontSize: '11px', fontWeight: 700, color: 'white', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Passo 1 — Diagnóstico de Capacidade
+            <span style={{ fontSize: '11px', fontWeight: 700, color: '#217FF1', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              Diagnóstico de Capacidade
             </span>
           </div>
           <h2 className="ayl-h2" style={{ marginBottom: '12px', color: '#0a1c42' }}>
@@ -67,7 +130,7 @@ export default function AilyxAudit() {
                 { icon: '🗂️', label: 'Administração',        q: 'Quantas horas em trabalho de baixo valor?' },
                 { icon: '🔌', label: 'Ferramentas',          q: 'Onde há um humano a fazer a ponte entre sistemas?' },
               ].map((item, i) => (
-                <div key={i} style={{
+                <div key={i} className="audit-row" style={{
                   display: 'flex', alignItems: 'flex-start', gap: '12px',
                   padding: '14px 28px',
                   borderBottom: i < 4 ? '1px solid #f0f2f8' : 'none',
@@ -114,7 +177,7 @@ export default function AilyxAudit() {
                   { val: '4',  label: 'alta prioridade' },
                 ].map((s, i) => (
                   <div key={i} style={{ background: '#fff', padding: '16px', textAlign: 'center' }}>
-                    <div style={{ fontFamily: 'Sora, sans-serif', fontWeight: 800, fontSize: '28px', color: '#217FF1', letterSpacing: '-0.04em' }}>{s.val}</div>
+                    <div ref={el => statsRef.current[i] = el} style={{ fontFamily: 'Sora, sans-serif', fontWeight: 800, fontSize: '28px', color: '#217FF1', letterSpacing: '-0.04em' }}>{s.val}</div>
                     <div style={{ fontSize: '11px', color: '#999', marginTop: '2px' }}>{s.label}</div>
                   </div>
                 ))}
@@ -122,11 +185,11 @@ export default function AilyxAudit() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: '#e8edf5' }}>
                 <div style={{ background: '#EEF4FF', padding: '16px 20px' }}>
                   <div style={{ fontSize: '10px', color: '#217FF1', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '4px' }}>Receita recuperável</div>
-                  <div style={{ fontFamily: 'Sora, sans-serif', fontWeight: 800, fontSize: '22px', color: '#0a1c42' }}>€72.000<span style={{ fontSize: '13px', fontWeight: 500, color: '#999' }}>/ano</span></div>
+                  <div style={{ fontFamily: 'Sora, sans-serif', fontWeight: 800, fontSize: '22px', color: '#0a1c42' }}><span ref={el => metricsRef.current[0] = el}>€72.000</span><span style={{ fontSize: '13px', fontWeight: 500, color: '#999' }}>/ano</span></div>
                 </div>
                 <div style={{ background: '#EEF4FF', padding: '16px 20px' }}>
                   <div style={{ fontSize: '10px', color: '#217FF1', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '4px' }}>Capacidade operacional</div>
-                  <div style={{ fontFamily: 'Sora, sans-serif', fontWeight: 800, fontSize: '22px', color: '#0a1c42' }}>1.240<span style={{ fontSize: '13px', fontWeight: 500, color: '#999' }}>h/ano</span></div>
+                  <div style={{ fontFamily: 'Sora, sans-serif', fontWeight: 800, fontSize: '22px', color: '#0a1c42' }}><span ref={el => metricsRef.current[1] = el}>1.240</span><span style={{ fontSize: '13px', fontWeight: 500, color: '#999' }}>h/ano</span></div>
                 </div>
               </div>
               <div style={{ padding: '12px 20px', borderTop: '1px solid #e8edf5' }}>

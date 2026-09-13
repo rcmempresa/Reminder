@@ -30,6 +30,20 @@ export default function AilyxHero() {
       gsap.to(robotRef.current, { y: -14, duration: 3.5, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 2.2 })
     }
 
+    // — Magnetic CTA button —
+    const cta = heroRef.current?.querySelector('.hero-cta-btn')
+    if (cta && window.innerWidth > 768) {
+      const onMove = (e) => {
+        const r = cta.getBoundingClientRect()
+        const x = e.clientX - r.left - r.width / 2
+        const y = e.clientY - r.top - r.height / 2
+        gsap.to(cta, { x: x * 0.18, y: y * 0.12, duration: 0.35, ease: 'power2.out' })
+      }
+      const onLeave = () => gsap.to(cta, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1,0.5)' })
+      cta.addEventListener('mousemove', onMove)
+      cta.addEventListener('mouseleave', onLeave)
+    }
+
     // — Scroll-out parallax (desktop only) —
     if (window.innerWidth > 768) {
       gsap.to(contentRef.current, {
@@ -144,18 +158,15 @@ export default function AilyxHero() {
               </p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-                <a href="/diagnostico" style={{
+                <a href="/diagnostico" className="hero-cta-btn" style={{
                   background: '#217FF1', color: '#fff',
                   fontFamily: 'Sora, sans-serif', fontWeight: 700,
                   fontSize: '15px', padding: '16px 32px',
                   borderRadius: '14px', textDecoration: 'none',
                   display: 'inline-flex', alignItems: 'center',
                   boxShadow: '0 8px 32px rgba(33,127,241,0.45)',
-                  transition: 'transform 0.18s ease, box-shadow 0.18s ease',
-                }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 14px 40px rgba(33,127,241,0.55)' }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 32px rgba(33,127,241,0.45)' }}
-                >
+                  willChange: 'transform',
+                }}>
                   Ver quanto estou a perder →
                 </a>
               </div>
