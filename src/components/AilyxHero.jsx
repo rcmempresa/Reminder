@@ -90,6 +90,18 @@ export default function AilyxHero() {
             {/* LEFT — copy */}
             <div ref={contentRef} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
+              {/* Metric badge */}
+              <div style={{
+                display: 'inline-flex', alignItems: 'center', gap: '10px',
+                background: 'rgba(33,127,241,0.18)', border: '1px solid rgba(33,127,241,0.35)',
+                borderRadius: '100px', padding: '7px 16px', alignSelf: 'flex-start',
+              }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', animation: 'hero-pulse 2s ease-in-out infinite', flexShrink: 0 }} />
+                <span style={{ fontSize: '12px', fontWeight: 600, color: '#90c8ff' }}>
+                  Média de €50.000+ em oportunidades identificadas por empresa
+                </span>
+              </div>
+
                 <h1 className="hero-h1" style={{
                 fontFamily: 'Sora, sans-serif', fontWeight: 700,
                 fontSize: 'clamp(26px, 3vw, 44px)',
@@ -100,7 +112,7 @@ export default function AilyxHero() {
               </h1>
 
               <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '17px', lineHeight: 1.7, maxWidth: '500px', margin: 0 }}>
-                Identificamos onde a sua equipa está a perder tempo, dinheiro e capacidade — e transformamos esses processos em sistemas automatizados com IA que trabalham por si. Medimos o impacto real em horas poupadas, custos reduzidos e capacidade recuperada.
+                Em 60 minutos identificamos onde a sua empresa está a perder dinheiro, tempo e capacidade. Entregamos um mapa com as oportunidades priorizadas por ROI — e implementamos os sistemas que as eliminam.
               </p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
@@ -116,13 +128,19 @@ export default function AilyxHero() {
                   onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 14px 40px rgba(33,127,241,0.55)' }}
                   onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 32px rgba(33,127,241,0.45)' }}
                 >
-                  Descobrir onde podemos criar impacto →
+                  Ver quanto estou a perder →
                 </a>
               </div>
 
-              <span style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.02em' }}>
-                Diagnóstico gratuito · 60 min · Sem compromisso
-              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.02em' }}>
+                  Gratuito · 60 min · Sem compromisso
+                </span>
+                <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.2)' }}>·</span>
+                <span style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.3)' }}>
+                  Apenas 4 diagnósticos disponíveis por mês
+                </span>
+              </div>
             </div>
 
             {/* RIGHT — Robot visual */}
