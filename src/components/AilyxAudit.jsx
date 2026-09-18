@@ -5,10 +5,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const AREAS = [
-  { label: 'Revenue',    sub: 'Sales, Marketing e Customer Success', desc: 'Leads, follow-ups, propostas, oportunidades, campanhas e acompanhamento de clientes.' },
-  { label: 'Operations', sub: 'Operations, Admin e Procurement',     desc: 'Tarefas manuais, coordenação, documentos, compras e processos que dependem de pessoas.' },
-  { label: 'Customer',   sub: 'Support, Communication e Retention',  desc: 'Respostas repetitivas, triagem, comunicação, onboarding, acompanhamento e reativação.' },
-  { label: 'Business',   sub: 'Finance, HR, Research e Compliance',  desc: 'Relatórios, cobrança, recrutamento, research, documentação e processos administrativos.' },
+  { label: 'Crescimento e Vendas',   sub: 'Vendas, Marketing e Acompanhamento de Clientes', desc: 'Leads, follow-ups, propostas, oportunidades, campanhas e acompanhamento de clientes.' },
+  { label: 'Operações e Execução',   sub: 'Operações, Administração e Compras',             desc: 'Tarefas manuais, coordenação, documentos, compras e processos que dependem de pessoas.' },
+  { label: 'Clientes e Comunicação', sub: 'Suporte, Comunicação e Retenção',                desc: 'Respostas repetitivas, triagem, comunicação, onboarding, acompanhamento e reativação.' },
+  { label: 'Gestão e Controlo',      sub: 'Financeiro, RH, Pesquisa e Conformidade',        desc: 'Relatórios, cobrança, recrutamento, pesquisa, documentação e processos administrativos.' },
 ]
 
 const ROADMAP = [
