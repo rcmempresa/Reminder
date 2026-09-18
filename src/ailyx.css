@@ -357,7 +357,7 @@ body {
   align-items: center;
   gap: 0;
   width: max-content;
-  animation: logo-ticker 28s linear infinite;
+  animation: logo-ticker 18s linear infinite;
 }
 
 .logo-ticker__item {
@@ -366,7 +366,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 72px;
-  padding: 0 56px;
+  padding: 0 28px;
   opacity: 0.7;
   filter: brightness(0) invert(1);
   transition: opacity 0.3s;
@@ -393,6 +393,13 @@ body {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+/* ── Process 2x2 card grid ── */
+.ayl-process-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
 
 /* ─── NAV ────────────────────────────────────────────────────────── */
 .ayl-nav {
@@ -3791,6 +3798,11 @@ svg path[stroke-dasharray] {
   100% { top: 100%; opacity: 0; }
 }
 
+@keyframes hero-testimonials-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 
 /* ── Prevent horizontal scroll on mobile ── */
 html, body {
@@ -3876,6 +3888,12 @@ html, body {
   box-shadow: 0 8px 24px rgba(33,127,241,0.4);
 }
 
+/* ── Hero grid — desktop default (no inline styles needed) ── */
+.ayl-hero-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
 /* ════════════════════════════════════════════════════════════
    MOBILE RESPONSIVE — max-width: 768px
    ════════════════════════════════════════════════════════════ */
@@ -3894,23 +3912,43 @@ html, body {
 
   /* ── Hero ── */
   .ayl-hero-grid {
-    grid-template-columns: 1fr !important;
-    gap: 32px !important;
+    grid-template-columns: 1fr;
+    gap: 0;
   }
-  /* Robot visible on mobile, scaled down */
-  .ayl-hero-robot {
-    display: flex !important;
-    justify-content: center !important;
-    opacity: 1 !important;
-    max-height: 360px;
-    overflow: hidden;
-    padding-top: 80px;
+  /* Hide standalone LogoTicker on mobile — hero already shows logos */
+  .logo-ticker {
+    display: none !important;
   }
-  .ayl-robot-canvas {
-    transform: scale(0.65) !important;
-    transform-origin: top center !important;
-    flex-shrink: 0;
+  /* Logo strip: 1 logo at a time */
+  .hero-logo-single .logo-ticker__item {
+    min-width: calc(100vw - 40px);
+    padding: 0;
+    justify-content: center;
   }
+  .hero-logo-single .logo-ticker__divider {
+    display: none;
+  }
+  .hero-logo-single .logo-ticker__img {
+    height: 36px;
+  }
+  /* Content column: min-width:0 prevents logo ticker (width:max-content)
+     from inflating the grid column beyond the viewport */
+  .ayl-hero-content-col {
+    min-width: 0;
+    text-align: center;
+  }
+  /* Center the CTA button row */
+  .ayl-hero-content-col > div {
+    justify-content: center;
+  }
+  /* Center the "60 min" subtext */
+  .ayl-hero-content-col > span {
+    display: block;
+    text-align: center;
+  }
+  /* Robot hidden on mobile — logo strip shows instead */
+  .ayl-hero-robot { display: none !important; }
+  .hero-mobile-proof { display: flex !important; }
   .ayl-hero-trustbar {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 0 !important;
@@ -3944,6 +3982,12 @@ html, body {
   .ayl-includes-grid {
     grid-template-columns: 1fr !important;
     gap: 32px !important;
+  }
+
+  /* ── Process cards ── */
+  .ayl-process-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
   }
 
   /* ── Outcomes ── */

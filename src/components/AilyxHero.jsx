@@ -1,83 +1,41 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export default function AilyxHero() {
-  const heroRef    = useRef(null)
   const contentRef = useRef(null)
   const robotRef   = useRef(null)
 
   useEffect(() => {
-    const el = contentRef.current
-    if (!el) return
+    const ctx = gsap.context(() => {
+      const el = contentRef.current
+      if (!el) return
 
-    // — Entrance animations —
-    const lines    = Array.from(el.querySelectorAll('.hero-h1-inner'))
-    const siblings = Array.from(el.children).filter(c => !c.classList.contains('hero-h1'))
-
-    gsap.set(lines, { y: '115%' })
-    gsap.to(lines, { y: '0%', duration: 1.15, ease: 'power4.out', stagger: 0.11, delay: 0.1 })
-    gsap.set(siblings, { y: 28, opacity: 0 })
-    gsap.to(siblings, { y: 0, opacity: 1, duration: 0.95, ease: 'power3.out', stagger: 0.11, delay: 0.6 })
-
-    if (robotRef.current) {
-      gsap.fromTo(robotRef.current,
-        { x: 60, opacity: 0 },
-        { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out', delay: 0.8 }
+      const siblings = Array.from(el.children)
+      gsap.fromTo(siblings,
+        { y: 28, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.95, ease: 'power3.out', stagger: 0.11, delay: 0.2 }
       )
-      gsap.to(robotRef.current, { y: -14, duration: 3.5, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 2.2 })
-    }
 
-    // — Magnetic CTA button —
-    const cta = heroRef.current?.querySelector('.hero-cta-btn')
-    if (cta && window.innerWidth > 768) {
-      const onMove = (e) => {
-        const r = cta.getBoundingClientRect()
-        const x = e.clientX - r.left - r.width / 2
-        const y = e.clientY - r.top - r.height / 2
-        gsap.to(cta, { x: x * 0.18, y: y * 0.12, duration: 0.35, ease: 'power2.out' })
+      if (robotRef.current) {
+        gsap.fromTo(robotRef.current,
+          { x: 60, opacity: 0 },
+          { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out', delay: 0.8 }
+        )
+        gsap.to(robotRef.current, { y: -14, duration: 3.5, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 2.2 })
       }
-      const onLeave = () => gsap.to(cta, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1,0.5)' })
-      cta.addEventListener('mousemove', onMove)
-      cta.addEventListener('mouseleave', onLeave)
-    }
-
-    // — Scroll-out parallax (desktop only) —
-    if (window.innerWidth > 768) {
-      gsap.to(contentRef.current, {
-        y: -90, opacity: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: '55% top',
-          scrub: 1.2,
-        },
-      })
-      gsap.to(robotRef.current, {
-        y: -140, opacity: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: '65% top',
-          scrub: 1.5,
-        },
-      })
-    }
+    })
+    return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={heroRef} style={{
+    <section style={{
       position: 'relative',
       width: '100%',
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
       background: '#06102a',
-      overflow: 'hidden',
+      overflowX: 'hidden',
     }}>
 
       {/* Animated mesh background */}
@@ -122,27 +80,15 @@ export default function AilyxHero() {
         display: 'flex',
         alignItems: 'center',
         width: '100%',
-        padding: 'calc(var(--nav-h) + var(--bar-h, 0px) + 32px) 0 40px',
+        padding: 'calc(var(--nav-h, 72px) + 32px) 0 48px',
         position: 'relative',
         zIndex: 2,
       }}>
         <div className="ayl-container">
-          <div className="ayl-hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
+          <div className="ayl-hero-grid" style={{ display: 'grid', alignItems: 'center' }}>
 
             {/* LEFT — copy */}
-            <div ref={contentRef} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-
-              {/* Metric badge */}
-              <div style={{
-                display: 'inline-flex', alignItems: 'center', gap: '10px',
-                background: 'rgba(33,127,241,0.18)', border: '1px solid rgba(33,127,241,0.35)',
-                borderRadius: '100px', padding: '7px 16px', alignSelf: 'flex-start',
-              }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', animation: 'hero-pulse 2s ease-in-out infinite', flexShrink: 0 }} />
-                <span style={{ fontSize: '12px', fontWeight: 600, color: '#90c8ff' }}>
-                  Média de €50.000+ em oportunidades identificadas por empresa
-                </span>
-              </div>
+            <div ref={contentRef} className="ayl-hero-content-col" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
                 <h1 className="hero-h1" style={{
                 fontFamily: 'Sora, sans-serif', fontWeight: 700,
@@ -153,37 +99,38 @@ export default function AilyxHero() {
                 Faça a sua empresa crescer sem contratar mais pessoas.
               </h1>
 
-              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '17px', lineHeight: 1.7, maxWidth: '500px', margin: 0 }}>
-                Em 60 minutos identificamos onde a sua empresa está a perder dinheiro, tempo e capacidade. Entregamos um mapa com as oportunidades priorizadas por ROI — e implementamos os sistemas que as eliminam.
+              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '17px', lineHeight: 1.7, maxWidth: '480px', margin: 0 }}>
+                Identificamos os processos que estão a consumir mais tempo e dinheiro, transformamo-los em sistemas automatizados com IA e medimos o impacto real no seu negócio.
               </p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-                <a href="/diagnostico" className="hero-cta-btn" style={{
+                <a href="/diagnostico" style={{
                   background: '#217FF1', color: '#fff',
                   fontFamily: 'Sora, sans-serif', fontWeight: 700,
                   fontSize: '15px', padding: '16px 32px',
                   borderRadius: '14px', textDecoration: 'none',
                   display: 'inline-flex', alignItems: 'center',
                   boxShadow: '0 8px 32px rgba(33,127,241,0.45)',
-                  willChange: 'transform',
-                }}>
-                  Ver quanto estou a perder →
+                  transition: 'transform 0.18s ease, box-shadow 0.18s ease',
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 14px 40px rgba(33,127,241,0.55)' }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 32px rgba(33,127,241,0.45)' }}
+                >
+                  Descobrir onde podemos criar impacto →
                 </a>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
-                <span style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.02em' }}>
-                  Gratuito · 60 min · Sem compromisso
-                </span>
-                <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.2)' }}>·</span>
-                <span style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.3)' }}>
-                  Apenas 4 diagnósticos disponíveis por mês
-                </span>
-              </div>
+              <span style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.02em' }}>
+                Diagnóstico gratuito · 60 min · Sem compromisso
+              </span>
+
+              {/* Mobile-only logo strip */}
+              <MobileLogoStrip />
+
             </div>
 
             {/* RIGHT — Robot visual */}
-            <div ref={robotRef} className="ayl-hero-robot" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', opacity: 0 }}>
+            <div ref={robotRef} className="ayl-hero-robot" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
               <RobotVisual />
             </div>
 
@@ -196,22 +143,48 @@ export default function AilyxHero() {
   )
 }
 
+const LOGOS = [
+  { src: '/logo_rdpower.png',        alt: 'RD Power Nutrition' },
+  { src: '/logo_nrtechsolucion.png', alt: 'NR Techsolución' },
+  { src: '/logo_jpcrodrigues.png',   alt: 'JPC Rodrigues' },
+  { src: '/logo_jj_bespoke.png',     alt: 'J&J Bespoke Travel' },
+]
+
+function MobileLogoStrip() {
+  const items = [...LOGOS, ...LOGOS]
+  return (
+    <div className="hero-mobile-proof" style={{
+      display: 'none',
+      flexDirection: 'column',
+      gap: '12px',
+      marginTop: '8px',
+      paddingTop: '20px',
+      borderTop: '1px solid rgba(255,255,255,0.08)',
+    }}>
+      <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase', margin: '0 auto' }}>
+        Empresas que já trabalham com a Reminder
+      </p>
+      <div className="logo-ticker__track-wrap hero-logo-single">
+        <div className="logo-ticker__track">
+          {items.map((l, i) => (
+            <div key={i} className="logo-ticker__item">
+              <img src={l.src} alt={l.alt} className="logo-ticker__img" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // Hub center in the 440×440 space. Robot head is centered at ~(220,200).
 const HUB_CX = 220, HUB_CY = 200
-const CardIcon = ({ path, path2, poly }) => (
-  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    {path  && <path d={path} />}
-    {path2 && <path d={path2} />}
-    {poly  && <polyline points={poly} />}
-  </svg>
-)
-
 const HERO_CARDS = [
-  { label: 'Novo lead recebido',   sub: 'respondido em segundos', color: '#5aabff', icon: <CardIcon path="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" poly="22,6 12,13 2,6" />, px: 290, py: 28,  dur: '2.2s', delay: '0s'   },
-  { label: 'Proposta enviada',     sub: 'sem intervenção manual', color: '#4ade80', icon: <CardIcon path="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" poly="14,2 14,8 20,8" />, px: 320, py: 185, dur: '2.8s', delay: '0.5s'  },
-  { label: 'Reunião marcada',      sub: 'automaticamente',        color: '#a78bfa', icon: <CardIcon path="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />, px: 270, py: 355, dur: '2.0s', delay: '1.0s'  },
-  { label: 'Follow-up enviado',    sub: 'no momento certo',       color: '#fb7185', icon: <CardIcon path="M5 12h14M12 5l7 7-7 7" />, px: 30,  py: 330, dur: '3.0s', delay: '0.3s'  },
-  { label: 'Cliente atendido',     sub: 'sem espera',             color: '#f59e0b', icon: <CardIcon path="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />, px: 10,  py: 150, dur: '2.5s', delay: '0.7s'  },
+  { label: 'Novo lead recebido',   sub: 'respondido em segundos', color: '#5aabff', icon: '📩', px: 290, py: 28,  dur: '2.2s', delay: '0s'   },
+  { label: 'Proposta enviada',     sub: 'sem intervenção manual', color: '#4ade80', icon: '📄', px: 320, py: 185, dur: '2.8s', delay: '0.5s'  },
+  { label: 'Reunião marcada',      sub: 'automaticamente',        color: '#a78bfa', icon: '📅', px: 270, py: 355, dur: '2.0s', delay: '1.0s'  },
+  { label: 'Follow-up enviado',    sub: 'no momento certo',       color: '#fb7185', icon: '↗',  px: 30,  py: 330, dur: '3.0s', delay: '0.3s'  },
+  { label: 'Cliente atendido',     sub: 'sem espera',             color: '#f59e0b', icon: '💬', px: 10,  py: 150, dur: '2.5s', delay: '0.7s'  },
 ]
 const heroCx = c => c.px + 80  // card ~160px wide
 const heroCy = c => c.py + 24  // card ~48px tall
