@@ -5,11 +5,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const AREAS = [
-  { label: 'Vendas e receita',    desc: 'Leads, follow-up, propostas e oportunidades em aberto.' },
-  { label: 'Atendimento',        desc: 'Respostas repetitivas, triagem e tempo da equipa com clientes.' },
-  { label: 'Operações internas', desc: 'Tarefas manuais, coordenação e fluxos que dependem de pessoas.' },
-  { label: 'Administração',      desc: 'Emails, documentos, relatórios e introdução de dados.' },
-  { label: 'Ferramentas',        desc: 'Sistemas que não comunicam e trabalho manual entre plataformas.' },
+  { label: 'Revenue',    sub: 'Sales, Marketing e Customer Success', desc: 'Leads, follow-ups, propostas, oportunidades, campanhas e acompanhamento de clientes.' },
+  { label: 'Operations', sub: 'Operations, Admin e Procurement',     desc: 'Tarefas manuais, coordenação, documentos, compras e processos que dependem de pessoas.' },
+  { label: 'Customer',   sub: 'Support, Communication e Retention',  desc: 'Respostas repetitivas, triagem, comunicação, onboarding, acompanhamento e reativação.' },
+  { label: 'Business',   sub: 'Finance, HR, Research e Compliance',  desc: 'Relatórios, cobrança, recrutamento, research, documentação e processos administrativos.' },
 ]
 
 const ROADMAP = [
@@ -82,7 +81,8 @@ export default function AilyxAudit() {
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                     <div>
-                      <div style={{ fontSize: '14px', color: '#333', fontWeight: 600, marginBottom: '2px' }}>{item.label}</div>
+                      <div style={{ fontSize: '14px', color: '#333', fontWeight: 700, marginBottom: '1px' }}>{item.label}</div>
+                      <div style={{ fontSize: '11px', color: '#217FF1', fontWeight: 600, marginBottom: '3px' }}>{item.sub}</div>
                       <div style={{ fontSize: '12px', color: '#888', lineHeight: 1.45 }}>{item.desc}</div>
                     </div>
                   </div>
